@@ -1,0 +1,244 @@
+
+body{
+    background-image: linear-gradient(to right,#5de0e6 ,#004aad);
+}
+h1, h2, h3, h4, p {
+    color: aliceblue;
+    font-family: 'Alfa Slab One', sans-serif;
+      
+}
+h2{
+    margin: 20px;
+    padding: 2px;
+    font-size: 1.3rem;
+      
+}
+h1{
+    
+    text-align: center;
+    font-size: 75px;
+    width: 100%;
+
+
+}
+p{
+    text-align: center;
+    font-size: 1.5rem;
+
+}
+h3{
+    margin: 10px;
+    text-align: left;
+    font-size: 3rem;
+    color: #f3d64c;
+z
+
+}
+h4{
+    margin: 10px;
+    font-size: 2rem;
+
+}
+.menu{
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        font-size: 15px;
+    
+    
+}
+form {
+    margin: 25px;
+    width: 400px;
+    padding: 12px;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+  font: 2em ,sans-serif;
+  width: 350px;
+  box-sizing: border-box;
+  border: 1px solid #f2f6f8;
+  vertical-align: top;
+  font-style: italic;
+}
+input::placeholder {
+    font-size: 0.6em;
+}
+input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    font-size: 30px
+    border: 1px solid rgb(black);
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px blue;
+    
+    
+}
+select{
+    width: 95%;
+    padding: 10px;
+    font-size: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px  5px blue;
+    gap: 10px;
+    margin-top: 10px; 
+}
+.boutton{
+   background-color:#f3d64c;
+   border: none;
+   color: blue;
+   padding: 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 24px;
+   margin: 1px 100px;
+   border-radius: 2rem;
+   float: right;
+   background-position:center ;
+   margin-top: -400px;
+   width: 15%;
+
+}
+p{
+    float: right;
+    line-height: 1.5;
+    padding: 10px;
+    margin-top: -300px;
+    font-family:Arial;
+    text-align: center;
+    font-size: 20px;
+  
+}
+.Inscription{
+    background-color:#f3d64c;
+    border: none;
+    color: blue;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 295px;
+    border-radius: 2rem;
+    float: right;
+    background-position:center ;
+    margin-top: -215px;
+    width: 8%;
+    line-height: 0.5;
+    font-family: 'Alfa One Slab',sans serif;
+ 
+}
+.Connexion{
+    background-color:#f3d64c;
+    border: none;
+    color: blue;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 30px;
+    border-radius: 2rem;
+    float: right;
+    background-position:center ;
+    margin-top: -210px;
+    width: 8%;
+    line-height: 0.5;
+    font-family: 'Alfa One Slab',sans-serif;
+ 
+
+}
+img{
+    margin: 0px;
+    padding: 5px;
+}
+nav{
+    margin:px 20px;
+    color: white;
+    background-position:center ;
+    width: %;
+    float: :right;
+    line-height: 1.5;
+    padding: 10px;
+    margin-top: -15px;
+    font-family:Open Sans;
+    text-align: center;
+    font-size: 30px;
+    
+  
+
+}
+navbar{
+    padding: 5px;
+   text-decoration: none;
+   text-align: center;
+   display: inline-block;
+   font-size: 16px;
+   margin: 15px 90px;
+   float: right;
+   color: white;
+   margin-top: -5px;
+   top: 50px;
+   border-radius: 2rem;
+   font-family: Oppens Sans;
+}
+.cadre {
+    border: 2px solid rgb(30, 26, 231);
+    padding: 25px;
+    width: fit-content;
+    height: 200px;
+    line-height: 1.5;
+    background-color: rgba(0, 0, 0, 0.415);
+  }
+  .Inscription2{
+    background-color:#f3d64c;
+    border: none;
+    color: blue;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 1px -380px;
+    border-radius: 2rem;
+    float: right;
+    background-position:center ;
+    margin-top: 260px; 
+    width: 8%;
+    line-height: 0.5;
+    font-family: Alpha Slab One;
+ 
+  }
+  bdo{
+    position: absolute;
+    right: 500px;
+    top:100px;
+    visibility: visible;
+    transform: translate(350px,350px);
+    font-size: 16px;
+    font-family:Arial;
+    margin-top: 40px;
+  }
+  em{
+    color: #f3d64c;
+    float: right;
+    transform: translate(370px,370px);
+    margin-top: 5px;
+    margin-left: 50px ;
+  }
+  label {
+    color: #f2f6f8;
+    font-family: Poppins-medium;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 2px;
+
+  }
+
+

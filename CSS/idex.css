@@ -1,0 +1,129 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    display: grid;
+    grid-template-areas:
+    'header header header header header header'
+    'main main main main main main'
+    'footer footer footer footer footer footer'
+    ;
+    grid-template-rows: 1fr 27fr 1fr;
+    min-height: 100vh;
+}
+nav{
+    background-color:none;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+}
+
+body{
+    background-image: linear-gradient(to right ,#5de0e6 ,#004aad); background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
+
+
+}
+header {
+    background: none;
+    color: #fff;
+    padding: 10px 0;
+
+
+    }
+#logo {
+    max-width: 40px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+.desc {
+    text-align: left;
+    padding-inline: 50px;
+    color: white; 
+}
+
+.desc h1 {
+    font-size: 2.5em;
+    color:  #f3d64c;
+    position: absolute;
+    font-size: 40px;
+    font-weight: 800;
+    max-width: 48%;
+    margin-top: 4%;
+}
+
+.desc h2 {
+    font-size: 1.5em;
+    position: absolute;
+    top: 30%;
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: 800;
+    max-width: 48%;
+}
+section label {
+    display: block;
+    color: #ccc;
+    
+}
+
+section input {
+    width: 63%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 29%;
+}
+
+
+section {
+width: 50%;
+margin-inline: 20px;
+}
+.bntNavbar{
+    background-color: #f3d64c;
+    color: rgb(57, 20, 188);
+    font-size: 18px;
+    padding: 7px 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 64%;
+    right: 750px;
+    font-weight: 800;
+    max-width: 48%;
+
+    }
+    .bntNavbars{
+        background-color: #f3d64c;
+        color: rgb(57, 20, 188);
+        font-size: 18px;
+        padding: 7px 30px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        position: absolute;
+        top: 64%;
+        font-weight: 800;
+        max-width: 48%;
+    
+        
+
+        }
+        

@@ -1,0 +1,10 @@
+debugger;
+const urlParams = new URLSearchParams(window.location.search);
+const imc = urlParams.get('imc');
+const text = urlParams.get('text');
+console.log(imc);
+console.log(text);
+ var resultat = document.getElementById('resultat');
+   resultat.innerText = imc;
+   var resultattext = document.getElementById('text');
+   resultattext.innerText =text;

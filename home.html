@@ -10,24 +10,25 @@
 </head>
 
 <body>
-    <div id="id1"> <h2><b>&nbsp;&nbsp;<img src="#" alt="Logo" height="20px"> FitTrack</b></h2>
+    <div  id="id1" class="accueil"> 
+        <img class="cl1" src="img/SharedScreenshot.jpg" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
     <h3>Calculer votre Indice de masse corporelle</h3>
     <h4>Entrer vos informations personnelles</h4>
     <section>
-        <form>
+        <form id="myform">
             <div class="b1">
-                <label for="Poids"><b>Poids</b></label><br>
+                <label for="Poids">Poids</label><br>
                 <input type="text" id="Poids" placeholder="Entrer votre poids" required >
 
             </div>
 
             <div class="b2">
-                <label for=""><b>Taille</b></label><br>
+                <label for="Taille">Taille</label><br>
                 <input type="text" id="Taille" placeholder="Entrer votre taille " required >
             </div>
 
             <div class="b3">
-                <label for="Age"><b>Age</b></label><br>
+                <label for="Age">Age</label><br>
                 <input type="text" id="Age" placeholder="Entrer votre age"></input><br>
                 <label for="genre" placeholder="">Genre</label>
                 <select id="genre" name="genre"><br>
@@ -35,7 +36,10 @@
                     <option value="femme">Femme</option>
                 </select>
             </div>
+           
         </form>
+        
+        
         <section>
             <div class="menu">
                 <ul>
@@ -61,26 +65,29 @@
                     margin-left: 60px;
                     margin-top: 27px;
                     font-size: 15px;
+                    font-family: Poppins;
 
                 }
 
                 li a {
                     display: block;
-                    color: white;
+                    color: #fff;
                     text-align: center;
                     padding: 16x;
                     margin-right: 30px;
                     text-decoration: none;
+                    font-size: 15px; 
+                    display: inline-block;
                 }
 
                 li a:hover {
                     background-color: transparent;
-                    color: white;
+                    color: #fff;
                     text-decoration: none;
                 }
             </style>
-            <a href="#" class="boutton" onclick="calculerIMC()"><strong>Calculer mon IMC</strong></a>
-            <p id="resultat"></p>
+            <a href="#"  class="boutton" onclick="calculerIMC()" id="submit"><strong>Calculer mon IMC</strong></a>
+            <span id="resultat"></span>
             <p>Si vous souhaitez vous inscrire directement ou <br> vous connectez , appuyer sur:</p>
             <a class="Inscription" href="inscription.html"><strong>S'inscrire</strong></a>
             <a class="Connexion" href="connexion.html"><strong>Se connecter</strong></a>

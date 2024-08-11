@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page_d'inscription_FitTrack</title>
+<link rel="stylesheet" href="CSS/Design_Inscription_IMC.css">
+</head>
+<body>
+     <div id="id1"> <img class="cl12" src="img/LOGO.png" alt="Logo" height="50px"><h3><b>FitTrack</b></h3>
+        <header><a class="home" href="Application_IMC/home.html">Accueil</a>
+         <a class="con" href="Application_IMC/connexion.html">Se Connecter</a>
+            <a class="about" href="#">A Propos</a></header></div>
+    <h1><b>&nbsp;&nbsp;Inscrivez Vous</b></h1>
+    <h2>&nbsp;&nbsp;&nbsp;Connaitre son IMC</h2>
+    <P>Découvrez FitTrack , notre application innovante <br> qui calcule votre IMC 
+        , suit votre sante et vous <br> aide à atteindre vos objectifs
+         de bien-être en <br> toute simplicité</P>
+         <form action="traitement.php" id="id2" >
+            <label for="username" class="username">Nom</label>
+            <input type="text" name="Nom" id="username" class="cl1" placeholder="Entrer votre Nom">
+            <label for="userPname" class="userPname">Prenom</label>
+            <input type="text" name="Prenom" id="userPname" class="cl2" placeholder="Entrer votre Prenom"><br>
+            <label for="Email" class="Email">Email</label>
+            <input type="text" name="Email" id="Email" class="cl3" placeholder="Entrer votre adresse Email"><br> 
+            <label for="text" class="mdp" >Mot de passe</label>
+            <input type="password" name="Mot_de_passe" id="mdp" class="cl4" placeholder="Entrer votre un mot de passe"> <br>
+            <label for="text" class="cmdp">Confirmer le mot de passe</label>
+            <input type="password" name="Confirmer_mot_de_passe" id="cmdp" class="cl5" placeholder="Confirmer votre mot de passe"> <br>
+            <button type="submit" id="inscrire" class="cl6">S'inscrire </button>
+            <button type="reset" id="Annuler" class="cl7">Annuler</button>           
+         </form>
+         <div class="cl8"><img class="cl10" src="img/TEL.png" height="40px" alt="tel">123-456-789 </div>
+         <div class="cl9"><img class="cl11" src="img/ADRESSE.png" height="40px" alt="adresse">FitTrack@gmail.com</div>
+         <Span style="color: red;" id="erreur1"></Span>
+
+
+         <script>
+                document.getElementById("cmdp").addEventListener("input",function() {
+                     var paragrapheErreur = document.getElementById("erreur1");
+
+                     if (this.value !=document.getElementById("Email").value) {
+                        paragrapheErreur.innerHTML = "Veuillez entrer le meme mot de passe";
+                     }
+                     if (this.value ==document.getElementById("Email").value) {
+                        paragrapheErreur.innerHTML = "Veuillez";
+                     }
+
+                  })
+
+
+                document.getElementById("id2").addEventListener("submit",function(e){
+                  
+                  var username = document.getElementById("username");
+                  var userPname = document.getElementById("userPname");
+                  var Email = document.getElementById("Email");
+                  var mdp = document.getElementById("mdp");
+                  var cmdp = document.getElementById("cmdp");
+                  var erreur1 ;
+                  if (!cmdp.value.trim()) {
+                     erreur1 = "Veuillez confirmer le mot de passe avant de continuer"
+                  }
+                  if (!mdp.value.trim()) {
+                     erreur1 = "Veuillez entrer un mot de passe avant de continuer"
+                  }
+                  if (!Email.value.trim()) {
+                     erreur1 = "Veuillez entrer votre Email avant de continuer"
+                  }
+                  if (!userPname.value.trim()) {
+                     erreur1 = "Veuillez entrer votre prenom avant de continuer"
+                  }             
+                  if (!username.value.trim()) {
+                     erreur1 = "Veuillez entrer votre nom avant de continuer"
+                  }
+                  if (erreur1) {
+                     e.preventDefault();
+                     document.getElementById("erreur1").innerHTML = erreur1 ;
+                   
+                  }
+                })
+         </script>
+
+</body>
+</html>

@@ -51,58 +51,70 @@ header{
 }
 .username{
     position: relative;
-    top: -30px;
-    left: 40px;
+    top: 00px;
+    left: 00px;
 }
 .userPname{
     position: relative;
-    top: -30px;
-    left: 50px;
+    top: 00px;
+    left: 00px;
 }
 .Email{
     position: relative;
-    top: 75px;
-    left: -600px;
+    top: 55px;
+    left: 00px;
 }
 .mdp{
     position: relative;
-    top: 130px;
-    left: 38px;
+    top: 110px;
+    left: 00px;
 }
 .cmdp{
     position: relative;
-    top: 230px;
-    left: -635px;
+    top:170px;
+    left: 00px;
 }
-#userPname{
+#username{
     position: relative;
-    left: -30px;
+    top: 36px;
+    left: -40px; 
 }
 
+#userPname{
+    position: relative;
+    top: 36px;
+    left: -66px; 
+}
+#erreur1{
+    position: relative;
+    top: -110px;
+    left: 610px;
+    font-size: 20px;
+}
 #Email{
     position: relative;
-    top: 115px;
-    left: -645px;
+    top: 95px;
+    left: -47px;   
 }
 #mdp{
     position: relative;
-    top: 172px;
-    left: -70px;
+    top: 150px;
+    left: -110px;  
 }
 #cmdp{
     position: relative;
-    top: 232px;
-    left: 40px;
+    top: 210px;
+    left: -217px;    
 }
 #inscrire{
     position: relative;
-    top:350px ;
-    left:-535px ;
+    top: 290px;
+    left: 00px;    
 }
 #Annuler{
     position: relative;
-    top: 350px;
-    left: -348px;
+    top: 290px;
+    left: 200px;
 }
 .cl6{
     width: 191px;
@@ -198,7 +210,7 @@ font-family: Poppins;
     color: #fff;
     font-size: 16px;
     font-family: poppins;
-    top: 170px;
+    top: 80px;
     left: 20px;
 }
 .cl9{
@@ -206,8 +218,8 @@ font-family: Poppins;
     color: #fff;
     font-size: 16px;
     font-family: poppins;
-    top: 200px;
-    left: 20px;
+    top: 85px;
+    left: 25px;
 }
 .cl10{
     position: relative;
@@ -219,6 +231,5 @@ font-family: Poppins;
 }
 #error1{
     position: relative;
-    top: 44px;
-    left: -255px;
+   
 }

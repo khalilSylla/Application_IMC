@@ -1,0 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    display: grid;
+    grid-template-areas:
+    'header header header header header header'
+    'main main main main main main'
+    'footer footer footer footer footer footer'
+    ;
+    grid-template-rows: 1fr 27fr 1fr;
+    min-height: 100vh;
+}
+nav{
+    background-image: to right cyan  #00BCD4,Blue #1E3A8A;
+    /* padding: 0 100px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body{
+    background-image: linear-gradient(to right ,#5de0e6 ,#004aad); background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
+
+
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px; /* Ajustez la taille selon vos besoins */
+    height: auto; /* Gardez les proportions de l'image */
+    margin-right: 10px; /* Espace entre le logo et le nom */
+}
+
+.ka1{
+    font-size: 24px; /* Taille de la police pour le nom */
+    color: white; /* Couleur du texte */
+    margin: 0; /* Supprime le marges par défaut */
+}
+header {
+    background: none;
+    color: #fff;
+    padding: 10px 0;
+
+
+    }
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+h1{
+    margin: 10px;
+    text-align: left;
+    font-size: 3rem;
+    color: #f3d64c;
+
+}
+h2{
+    margin: 10px;
+    font-size: 2rem;
+    color: #fff;
+
+}
+
+section label {
+    display: block;
+    color: white;
+    
+}
+.headerContainer{
+    padding-inline: 15px;
+ }
+
+section input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    margin-top: 8%;
+    width: 560px;
+    font-size: 17px;
+    opacity: 0.80;
+    border-radius: 13px;
+    
+}
+
+
+section {
+width: 50%;
+margin-inline: 20px;
+}
+.bntNavbar{
+    position: relative;
+    width: 191px;
+    left: 201px;
+    color: #004aad;
+    background-color: #f3d64c;
+    font-family: Alfa Slab One;
+    height: 45px;
+    font-size: 17px;
+    border-radius: 54px;
+margin-top: 5%;
+    }
+    .bntNavbars{
+     
+        width: 191px;
+        color: #004aad;
+        background-color: #f3d64c;
+        font-family: Alfa Slab One;
+        height: 45px;
+        font-size: 17px;
+        border-radius: 54px;
+        
+
+        }
+      
+
+      p{ font-size: 16px;
+    position: relative;
+    top: 11px;
+    left: 5px;
+    font-family: Poppins;
+    color: #fff;
+}

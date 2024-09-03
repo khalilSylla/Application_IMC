@@ -7,11 +7,13 @@
     <title>Page d'accueil</title>
     <link rel="stylesheet" href="CSS/style.css">
     <script src="JS/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
     <div  id="id1" class="accueil"> 
-        <img class="cl1" src="img/SharedScreenshot.jpg" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
+        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
     <h3>Calculer votre Indice de masse corporelle</h3>
     <h4>Entrer vos informations personnelles</h4>
     <section>
@@ -31,7 +33,9 @@
                 <label for="Age">Age</label><br>
                 <input type="text" id="Age" placeholder="Entrer votre age"></input><br>
                 <label for="genre" placeholder="">Genre</label>
+                <div id = "erreur"></div>
                 <select id="genre" name="genre"><br>
+                    <option> </option>
                     <option value="homme">Homme</option>
                     <option value="femme">Femme</option>
                 </select>

@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 body{
     background-image: linear-gradient(to right,#5de0e6 ,#004aad);
 }
@@ -196,7 +197,7 @@ navbar{
     transform: translate(350px,350px);
     font-size: 16px;
     font-family: poppins;
-    margin-top: -5px;
+    margin-top: 10px;
   }
   em{
     color: #f3d64c;
@@ -219,7 +220,6 @@ navbar{
     font-family :popins;
   }
   i{
-/* font-family: popins; */
 font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
   html{
@@ -233,4 +233,216 @@ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     max-width: 40px;
     margin-top: 50px;
 }
+body {
+    font-family: 'Roboto',sans-serif;
+    background-color:  #f4f4f4;
+    color:#333;
+    margin: 0;
+    padding: 0;
+}
+#se{
+font-size: 25px;
+font-family:Poppins;
+margin-left: 500px;
+margin-top: -30px;
 
+}
+
+.container {
+    width: 50%;
+    height: auto;
+    margin: 10px auto;
+    background: #000000a5;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-left: 5%;
+    font-family: Poppins;
+
+}
+
+.f1{
+    text-align: left;
+    color: rgba(236, 230, 230, 0.169);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    max-width: fit-content;
+    font-size: 24px;
+    font-family: popins;
+}
+
+.table {
+    width:80%;
+    border-collapse: collapse;
+    margin-left: 50px;
+    margin-right: 20px;
+    max-width: 800px;
+    border-spacing: 10px;
+    height: 400px;
+    
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 3px solid #ddd;
+}
+
+.table thead th {
+    color: #c9d1d9;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.table tbody tr:hover {
+    background-color: #27496d;
+}
+
+.table tbody tr td {
+    color: #c9d1d9;
+}
+
+.table tbody tr td:first-child {
+    font-weight: bold;
+}
+
+.table tbody tr td:last-child {
+    text-align: center;
+    border-bottom: none;
+}
+.icon1, .icon2 {
+    width: 25px;
+    height: 30px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.icon1 i, .icon2 i {
+    font-size: 20px;
+    color: rgba(161, 159, 159, 0.892);
+}
+
+.icon1 img, .icon2 img {
+    width: 100%;
+    height: 100%;
+}
+
+.icon-wrapper {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table tbody tr td.icon-cell {
+    border-bottom: none;
+}
+
+.add-icon {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.add-icon img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.f1 {
+    color: #c9d1d9;
+    padding: 10px;
+}
+
+.table tbody tr td.imc {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #c9d1d9;
+    color: #1c3a57;
+    text-align: center;
+}
+
+.table tbody tr td.imc.normal {
+    background-color: #77dd77;
+}
+
+.table tbody tr td.imc.surpoids {
+    background-color: #ffb347;
+}
+
+.table tbody tr td.imc.obesite {
+    background-color: #ff6961;
+}
+
+.table tbody tr td.imc.extreme_obesite {
+    background-color: #ff4040;
+}
+    .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 700px;
+    }
+    .valider-container{
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    input[type="text"][name="search"] {
+        border: none;
+        font: 2em sans-serif;
+        box-sizing: border-box;
+        height: 40px;
+        width: 60%;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #e0e7ef;
+        outline: none;
+        margin-left: 400px;
+        margin-top:-50px ;
+    }
+    
+    input[type="submit"] {
+        height: 40px;
+        font: 2em sans-serif;
+        border: none;
+        cursor: pointer;
+        background-color: #f3d64c;
+        margin-top: -40px;
+        margin-left: 650px;
+        width: auto;
+        padding: 5px 50px;
+        border-radius: 5px;
+        font-size: 10px;
+    }
+ .icon{
+    position: relative;
+    top: -40px;
+    left: 85px;
+ }
+ .s4{
+    visibility: visible;
+    margin-top: -30px;
+    margin-right: 150px;
+    font-size: 13px;
+ }
+ #lineChart {
+    width: 80%;
+    max-width: 500px;
+    height:1500px;
+    background-color: #140505ad;
+    border-radius: 15px;
+    margin-top: -310px;
+    margin-left: 60%;
+}
+.graph{
+    margin-top: -350px;
+    margin-right: 250px;
+    color: #f3d64c;
+    font-size: 24px;
+}

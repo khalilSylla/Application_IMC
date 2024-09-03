@@ -1,41 +1,34 @@
+document.getElementById("id2").addEventListener("submit", function(event) {
+   // Récupération des valeurs des champs
+   var motDePasse = document.getElementById("mdp").value;
+   var confirmerMotDePasse = document.getElementById("cmdp").value;
+   
+   // Références aux éléments où les messages d'erreur seront affichés
+   var erreur1 = document.getElementById("erreur1");
+   var erreur2 = document.getElementById("erreur2");
+   
+   // Initialisation des messages d'erreur
+   erreur1.textContent = "";
+   erreur2.textContent = "";
+   
+   var valid = true;
 
-document.getElementById("cmdp").addEventListener("input",function() {
-    var paragrapheErreur = document.getElementById("erreur1");
+   // Vérification du nombre minimum de caractères
+   if (motDePasse.length < 8) {
+       // Affiche le message d'erreur pour le mot de passe trop court
+       erreur1.textContent = "Le mot de passe doit contenir au minimum huit caractères";
+       valid = false; // Le formulaire n'est pas valide
+   }
 
-    if (this.value !=document.getElementById("Email").value) {
-       paragrapheErreur.innerHTML = "Veuillez entrer le meme mot de passe";
-    }else{
-        paragrapheErreur.innerHTML = "" ;
-    }
- })
+   // Vérification si les mots de passe correspondent
+   if (motDePasse !== confirmerMotDePasse) {
+       // Affiche le message d'erreur si les mots de passe ne correspondent pas
+       erreur2.textContent = "Veuillez entrer le mème mot de passe lors de la confirmation.";
+       valid = false; // Le formulaire n'est pas valide
+   }
 
-
-document.getElementById("id2").addEventListener("submit",function(e){
- 
- var username = document.getElementById("username");
- var userPname = document.getElementById("userPname");
- var Email = document.getElementById("Email");
- var mdp = document.getElementById("mdp");
- var cmdp = document.getElementById("cmdp");
- var erreur1 ;
- if (!cmdp.value.trim()) {
-    erreur1 = "Veuillez confirmer le mot de passe avant de continuer"
- }
- if (!mdp.value.trim()) {
-    erreur1 = "Veuillez entrer un mot de passe avant de continuer"
- }
- if (!Email.value.trim()) {
-    erreur1 = "Veuillez entrer votre Email avant de continuer"
- }
- if (!userPname.value.trim()) {
-    erreur1 = "Veuillez entrer votre prenom avant de continuer"
- }             
- if (!username.value.trim()) {
-    erreur1 = "Veuillez entrer votre nom avant de continuer"
- }
- if (erreur1) {
-    e.preventDefault();
-    document.getElementById("erreur1").innerHTML = erreur1 ;
-  
- }
-})
+   // Si le formulaire n'est pas valide, empêcher l'envoi
+   if (!valid) {
+       event.preventDefault(); // Empêche l'envoi du formulaire
+   }
+});

@@ -1,13 +1,11 @@
 body{
     background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
 }
-
 header{
-    position: fixed;
-    left: 1100.8px;
+    position: absolute;
+    left: 1000px;
     top: 20px;
     font-family: Poppins;
-    z-index: 1;
 
 }
 .home{
@@ -21,7 +19,7 @@ header{
 }
 .con{
     position: relative;
-    left: 5px;
+    left: 20px;
     font-family: Poppins;
     color: #fff;
     font: size 15px;
@@ -29,21 +27,20 @@ header{
 }
 .about{
     position: relative;
-    left: 15px;
+    left: 50px;
     font-family: Poppins;
     color: #fff;
     font: size 15px;
     text-decoration: none;
 }
 .cl12{
-    position: fixed;
+    position: absolute;
     top: 5px;
-    z-index: 1;
 
 }
 #id2{
     position: relative;
-    left: 600px;
+    left: 680px;
     top: -210px;
     font-size: 16px;
     font-family: Poppins;
@@ -79,17 +76,22 @@ header{
     top: 36px;
     left: -40px; 
 }
-
 #userPname{
     position: relative;
     top: 36px;
     left: -66px; 
 }
 #erreur1{
-    position: relative;
-    top: -110px;
-    left: 610px;
-    font-size: 20px;
+    position: absolute;
+    top: 420px;
+    left: 700px;
+    font-size: 16px;
+}
+#erreur2{
+    position: absolute;
+    top: 525px;
+    left: 700px;
+    font-size: 16px;
 }
 #Email{
     position: relative;
@@ -108,13 +110,26 @@ header{
 }
 #inscrire{
     position: relative;
-    top: 290px;
+    top: 300px;
     left: 00px;    
+
 }
 #Annuler{
     position: relative;
-    top: 290px;
-    left: 200px;
+    top: 300px;
+    left: 195px;
+}
+#selection_genre{
+    position: relative;
+    top: 245px;
+    font-family: Poppins;
+    
+}
+#genre{
+    height: 45px;
+    font-family: Poppins;
+    color: #004aad;
+    width: 570px;
 }
 .cl6{
     width: 191px;
@@ -152,7 +167,7 @@ h2{
 
 }
 h3{
-    position: fixed;
+    position: absolute;
     top: -10px;
     left: 70px;
     font-size: 25.1px;
@@ -169,8 +184,8 @@ p{
     color: #fff;
 }
 input{
-    height: 35px;
-font-family: Poppins;
+    height: 40px;
+    font-family: Poppins;
     position: relative;
     top: 10px;
     color: #004aad;
@@ -210,7 +225,7 @@ font-family: Poppins;
     color: #fff;
     font-size: 16px;
     font-family: poppins;
-    top: 80px;
+    top: 85px;
     left: 20px;
 }
 .cl9{
@@ -218,7 +233,7 @@ font-family: Poppins;
     color: #fff;
     font-size: 16px;
     font-family: poppins;
-    top: 85px;
+    top: 90px;
     left: 25px;
 }
 .cl10{
@@ -229,7 +244,59 @@ font-family: Poppins;
     position: relative;
     top: 10px;
 }
-#error1{
+.profile-container{
     position: relative;
-   
+    width: 1000px;
+    height: 420px;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: Poppins;
+    background-color: #0000005f;
+    border-radius: 54px;
+    top: 90px;
+    left: 160px;
+}
+
+.edit-profile,.view-history {
+    width: 260px;
+    color: #004aad;
+    background-color: #f3d64c;
+    font-family: Alfa Slab One;
+    height: 60px;
+    font-size: 17px;
+    border-radius: 54px;
+    position: relative;
+    left: 240px;
+    top: 235px;   
+}
+
+.personal-info{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.info-block{
+   background-color: #ffffffce;
+   border-radius: 60px;
+   padding: 15px;
+   text-align: center;
+   width: 135px;
+   position: relative;
+   top: 185px;
+}
+
+.info-block div {
+    font-size: 18px;
+    color:#004aad;
+}
+.mon_profil{
+    position: relative;
+    left: 350px;
+    top: 10px;
+}
+.profile-name{
+    position: relative;
+    top: 200px;
+    left: 420px;
 }

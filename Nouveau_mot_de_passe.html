@@ -1,82 +1,49 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'accueil</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <script src="JS/script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="CSS/Nouveau_mot_de_passe.css">
+<title>FitTrack</title>
 </head>
 <body>
-    <div  id="id1" class="accueil"> 
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
-        <div class="menu">
-            <ul>
-                <li><a href="home.html"><b>Accueil</b></a></li>
-                <li><a href="connexion.html"><b>Se connecter</b></a></li>
-                 
-                  <li><a href="home.html">Se Déconnecter</a></li>
-            </ul>
+    <header class="headerContainer">
+    
+        <nav>
+            <div class="logo-container"><img src="img/LOGO.png" alt="FitTrack Logo" id="logo" class="logo"> <h3 class="ka4">FitTrack</h3></div> 
+                <ul >
+                    <li>          
+                        <a href="linkNavbar" href="#">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="linkNavbar" href="#">Se connecter</a>
+                    </li>
+                    <li>
+                        <a href="linkNavbar" href="#">A propos</a>
+                    </li>
+                </ul>
+           
+        </nav>
+    </header>
+    <section class="desc" >
+        <div class="heroNo">
+            <h1>Mot de passe oublier</h1>
+            <h2>Regenere votre mot de passe</h2>
         </div>
-        <style>
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                float: left;
-
-
-            }
-            ul li {
-                float: left;
-                list-style: none;
-                margin-left: 60px;
-                margin-top: 27px;
-                font-size: 15px;
-                font-family: Poppins;
-
-            }
-
-            li a {
-                display: block;
-                color: #fff;
-                text-align: center;
-                padding: 16x;
-                margin-right: 30px;
-                text-decoration: none;
-                font-size: 15px; 
-                display: inline-block;
-            }
-
-            li a:hover {
-                background-color: transparent;
-                color: #fff;
-                text-decoration: none;
-            }
-        </style>
-        <section>
-            <div>
-                <h3>Mot de passe oublié</h3>
-                <h4>Générer votre mot de passe</h4>
-                <div  class="login-formNo">
-                    <form>
-                       <div><label for="code" >code de validation  </label></div> <br>
-                       <div> <input type="text" id="code" required class="ka1"></div> <br>
-                       <div> <label for="password">Nouveau mot de passe</label></div> <br>
-                       <div> <input type="text" id="password" required class="ka2"></div> <br>
-                       <div> <label for="password">Confirmation du nouveau  mot de passe</label></div> <br>
-                       <div> <input type="text" id="password" required class="ka3"></div> 
-                    </form>
-                </div>
-                    <div class="btn">
-                        <a class="Connexion" id="pp3" href="Nouveau_mot_de_passe.html"><strong>Se connecter</strong></a>
-                        <a class="Inscription" id="pp4" href="connexion.html"><strong>Annuler</strong></a>
-                        
-                    </div>
+        <div  class="login-formNo">
+            <form>
+               <div><label for="code">code de validation  </label></div> 
+               <div> <input type="code" id="code" required class="ka1"></div> 
+               <div> <label for="password">Nouveau mot de passe</label></div> 
+               <div> <input type="password" id="password" required class="ka2"></div> 
+               <div> <label for="password">Confirmation du nouveau  mot de passe</label></div> 
+               <div> <input type="password" id="password" required class="ka3"></div> 
+            </form>
+        </div>
+            <div class="btn">
+                <button class="bntNavbars">Se Connecter</button>
+                <button class="bntNavbar">Annuler</button>
             </div>
-        </section>
+    </section>
+</body>
+</html>

@@ -74,7 +74,7 @@ nav ul li a {
     color: white;
 }
 
-.desc h3 {
+.desc h1 {
     font-size: 2.5em;
     color:  #f3d64c;
     position: absolute;
@@ -83,7 +83,7 @@ nav ul li a {
     max-width: 48%;
 }
 
-.desc h4 {
+.desc h2 {
     font-size: 1.5em;
     position: absolute;
     top: 40%;
@@ -119,30 +119,28 @@ nav{
     display: flex;
 }
 
-.bntNavbar{
     
-    position: relative;
-    width: 191px;
-    left: 201px;
-    color: #004aad;
-    background-color: #f3d64c;
-    font-family: Alfa Slab One;
-    height: 45px;
-    font-size: 17px;
-    border-radius: 54px;
-
-    }
-    .bntNavbars{
-       
-        
-    width: 191px;
-    color: #004aad;
-    background-color: #f3d64c;
-    font-family: Alfa Slab One;
-    height: 45px;
-    font-size: 17px;
-    border-radius: 54px;
+    .bntNavbar{
+        position: relative;
+        width: 191px;
+        left: 201px;
+        color: #004aad;
+        background-color: #f3d64c;
+        font-family: Alfa Slab One;
+        height: 45px;
+        font-size: 17px;
+        border-radius: 54px;
         }
+        .bntNavbars{
+            width: 191px;
+        color: #004aad;
+        background-color: #f3d64c;
+        font-family: Alfa Slab One;
+        height: 45px;
+        font-size: 17px;
+        border-radius: 54px;
+        
+            }
         .forget-pass {
             margin-top: 18px;
             margin-left: 218px;

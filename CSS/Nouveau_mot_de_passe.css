@@ -109,7 +109,7 @@ p{
     border-radius: 54px;
     
         }
-        .login-form {
+        /* .login-form {
         
             padding: 20px;
             border-radius: 10px;
@@ -139,6 +139,36 @@ p{
             opacity: 0.80;
             border-radius: 13px;
             
+        } */
+        .login-form {
+        
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            border-radius: 10px;
+            position: absolute;
+            top: 18%;
+            right: 100px;
+            font-weight: 800;
+            max-width: 58%;
+            box-shadow: #fff;
+            border: 1px solid black;
+        }
+        
+        section label {
+            display: block;
+            color: white;       
+        }
+        
+        section input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 560px;
+            font-size: 17px;
+            opacity: 0.80;
+              border-radius: 13px;
         }
     
     

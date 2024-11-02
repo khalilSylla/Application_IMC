@@ -1,9 +1,18 @@
 <?php
+session_start(); // Démarrer la session
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['idUtilisateur'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header('Location: connexion.php');
+    exit();
+}
+
+// Récupérer l'ID de l'utilisateur connecté depuis la session
+$idUtilisateur = $_SESSION['idUtilisateur'];
+
 // Inclure le fichier de connexion à la base de données
 require_once("db1.php");
-
-// ID de l'utilisateur (à remplacer par l'ID actuel ou à récupérer dynamiquement)
-$idUtilisateur = 17; // Remplacez par l'ID actuel de l'utilisateur
 
 // Requête pour récupérer les informations de l'utilisateur, y compris le mot de passe haché
 $queryUtilisateur = "SELECT PRENOM, NOM, EMAIL, DATE_DE_NAISSANCE, ID_GENRE, MOTS_DE_PASSE FROM utilisateur WHERE ID_UTILISATEUR = :id";
@@ -39,12 +48,13 @@ if ($stmtUtilisateur->rowCount() > 0) {
     $prenom = $user['PRENOM'] ?? '';
     $nom = $user['NOM'] ?? '';
     $email = $user['EMAIL'] ?? '';
-    $motDePasseHash = $user['MOT_DE_PASSE'] ?? ''; // Récupérer le mot de passe haché
+    $motDePasseHash = $user['MOTS_DE_PASSE'] ?? ''; // Récupérer le mot de passe haché
 } else {
     echo "Erreur : Impossible de récupérer les informations de l'utilisateur";
     exit;
 }
 
+// Vérification des modifications et mise à jour du profil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Préparer la mise à jour sélective
     $champsModifies = [];
@@ -95,16 +105,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nouveauMotDePasse = $_POST['nouveau_mot_de_passe'] ?? '';
 
     if (!empty($ancienMotDePasse) && !empty($nouveauMotDePasse)) {
-        // Vérifier que l'ancien mot de passe correspond
-        if (hash('sha256', $ancienMotDePasse) === $motDePasseHash) {
+        // Hacher l'ancien mot de passe pour comparaison
+        $ancienMotDePasseHash = hash('sha256', $ancienMotDePasse);
+
+        // Vérifier que l'ancien mot de passe haché correspond à celui stocké dans la base de données
+        if ($ancienMotDePasseHash === $motDePasseHash) {
             // Hacher et mettre à jour le nouveau mot de passe
             $nouveauMotDePasseHash = hash('sha256', $nouveauMotDePasse);
-            $queryUpdatePassword = "UPDATE utilisateur SET MOT_DE_PASSE = :newPassword WHERE ID_UTILISATEUR = :id";
+            $queryUpdatePassword = "UPDATE utilisateur SET MOTS_DE_PASSE = :newPassword WHERE ID_UTILISATEUR = :id";
             $stmtUpdatePassword = $connectionbd->prepare($queryUpdatePassword);
             $stmtUpdatePassword->bindParam(':newPassword', $nouveauMotDePasseHash, PDO::PARAM_STR);
             $stmtUpdatePassword->bindParam(':id', $idUtilisateur, PDO::PARAM_INT);
             $stmtUpdatePassword->execute();
 
+            // Redirection après mise à jour réussie
             header('Location: User_Profil.php?message=success');
             exit;
         } else {
@@ -119,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -127,6 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil utilisateur</title>
     <link rel="stylesheet" href="CSS/Design_Inscription_IMC.css">
+    <!-- Lien vers Google Fonts pour les polices Alfa Slab One et Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <script>
         // Fonction pour activer/désactiver les champs du formulaire
         function activerModification() {
@@ -134,9 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.getElementById('nom').disabled = false;
             document.getElementById('genre').disabled = false;
             document.getElementById('date_naissance').disabled = false;
-            document.getElementById('ancien_mot_de_passe').disabled = false;
+            document.getElementById('ancien_mot_de_passe').disabled = false; // Activer le champ ancien mot de passe
             document.getElementById('modifier').style.display = 'none';
             document.getElementById('sauvegarder').style.display = 'inline';
+            
+            // Appeler la fonction pour vérifier si l'ancien mot de passe a été rempli
+            afficherNouveauMotDePasse();
         }
 
         // Fonction pour afficher le champ "Nouveau mot de passe" lorsque l'ancien est rempli
@@ -147,11 +165,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Si l'ancien mot de passe est rempli, afficher le champ pour le nouveau mot de passe
             if (ancienMotDePasse.length > 0) {
                 nouveauMotDePasseDiv.style.display = 'block';
+                document.getElementById('nouveau_mot_de_passe').disabled = false; // Activer le champ nouveau mot de passe
             } else {
                 nouveauMotDePasseDiv.style.display = 'none';
+                document.getElementById('nouveau_mot_de_passe').disabled = true; // Désactiver le champ nouveau mot de passe
             }
         }
     </script>
+
 </head>
 <body>
     <div id="id1">
@@ -159,70 +180,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h3><b>FitTrack</b></h3>
         <header>
             <a class="home" href="Application_IMC/home.html">Accueil</a>
-            <a class="con" href="Application_IMC/connexion.html">Se Déconnecter</a>
+            <a class="con" href="deconnexion.php">Se Déconnecter</a>
             <a class="about" href="#">À Propos</a>
         </header>
     </div>
+ <section class="position_profil">
+ <form class="profile-container" method="post">
+        <h2 style="font-family: 'Alfa Slab One', cursive;">Mon profil</h2>
 
-    <div class="profile-container">
-        <!-- Mon profil -->
-        <div class="mon_profil">
-            <h3>Mon profil</h3>
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($prenom) ?>" disabled>
+
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($nom) ?>" disabled>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="<?= htmlspecialchars($email) ?>" disabled>
+
+        <label for="genre">Genre</label>
+        <select class="sexe_disign" id="genre" name="genre" disabled>
+            <option value="1" <?= $genre === "Homme" ? 'selected' : '' ?>>Homme</option>
+            <option value="2" <?= $genre === "Femme" ? 'selected' : '' ?>>Femme</option>
+            <option value="0" <?= $genre === "Non spécifié" ? 'selected' : '' ?>>Non spécifié</option>
+        </select>
+
+        <label for="date_naissance">Date de naissance</label>
+        <input type="date" id="date_naissance" name="date_naissance" value="<?= htmlspecialchars($user['DATE_DE_NAISSANCE'] ?? '') ?>" disabled>
+
+        <label for="age">Âge</label>
+        <input type="text" id="age" value="<?= $age !== null ? $age . ' ans' : 'Non spécifié' ?>" disabled>
+
+        <h4 style="font-family: 'Alfa Slab One', cursive;">Changer de mot de passe</h4>
+
+            <label for="ancien_mot_de_passe">Ancien mot de passe</label>
+            <input type="password" id="ancien_mot_de_passe" name="ancien_mot_de_passe" oninput="afficherNouveauMotDePasse()" disabled>
+
+            <div id="nouveau_mot_de_passe_div" style="display:none;">
+            <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+            <input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe" disabled>
+           </div>
+
+        
+
+        <!-- Message d'erreur pour l'ancien mot de passe -->
+        <?php if (!empty($erreurMotDePasse)): ?>
+            <p style="color:red;"><?= htmlspecialchars($erreurMotDePasse) ?></p>
+        <?php endif; ?>
+
+        <div class="center">
+            <button type="button" class="cl6" id="modifier" onclick="activerModification()">Modifier</button>
+            <button type="submit" class="cl6" id="sauvegarder" style="display:none;">Sauvegarder</button>
         </div>
+    </form>
+ </section>
 
-        <!-- Formulaire pré-rempli -->
-        <form action="User_Profil.php" method="POST" id="id3">
-            <input type="hidden" name="id_utilisateur" value="<?php echo htmlspecialchars($idUtilisateur); ?>">
-
-            <div class="personal-info">
-                <label>Prénom </label><br>
-                <input type="text" id="prenom" name="prenom" class="cl3" value="<?php echo htmlspecialchars($prenom); ?>" disabled><br>
-
-                <label>Nom </label><br>
-                <input type="text" id="nom" name="nom" class="cl3" value="<?php echo htmlspecialchars($nom); ?>" disabled><br>
-
-                <label>Email </label><br>
-                <input type="email" id="email" name="email" class="cl3" value="<?php echo htmlspecialchars($email); ?>" disabled><br>
-
-                <label>Genre </label><br>
-                <select id="genre" class="cl3" name="genre" disabled>
-                    <option value="1" <?php if ($user['ID_GENRE'] == 1) echo 'selected'; ?>>Homme</option>
-                    <option value="2" <?php if ($user['ID_GENRE'] == 2) echo 'selected'; ?>>Femme</option>
-                </select><br>
-
-                <label>Date de naissance </label><br>
-                <input type="date" id="date_naissance" class="cl3" name="date_naissance" value="<?php echo htmlspecialchars($user['DATE_DE_NAISSANCE'] ?? ''); ?>" disabled><br>
-
-                <?php if (isset($age)) : ?>
-                <label>Âge </label><br>
-                <input type="text" class="cl3" value="<?php echo htmlspecialchars($age); ?> ans" disabled><br>
-                <?php endif; ?>
-                
-                <h4>Modifier mon mot de passe</h4>
-
-                <!-- Champ pour l'ancien mot de passe -->
-                <label>Ancien mot de passe</label><br>
-                <input type="password" id="ancien_mot_de_passe" placeholder="Entrer votre ancien mot de passe" name="ancien_mot_de_passe" class="cl3" oninput="afficherNouveauMotDePasse()" disabled><br>
-
-                <!-- Message d'erreur en rouge -->
-                <?php if (!empty($erreurMotDePasse)): ?>
-                    <span style="color: red;"><?php echo htmlspecialchars($erreurMotDePasse); ?></span><br>
-                <?php endif; ?>
-
-                <!-- Champ pour le nouveau mot de passe, caché initialement -->
-                <div id="nouveau_mot_de_passe_div" style="display:none;">
-                    <label>Nouveau mot de passe</label><br>
-                    <input type="password" id="nouveau_mot_de_passe" placeholder="Entrer votre nouveau mot de passe"  name="nouveau_mot_de_passe" class="cl3"><br>
-                </div>
-            </div><br>
-
-            <!-- Boutons -->
-            <div class="action-buttons">
-                <button type="button" class="cl6" id="modifier" onclick="activerModification()">Modifier le profil</button>
-                <button type="submit" class="cl6" id="sauvegarder" style="display:none;">Sauvegarder</button>
-                <button type="button" class="cl6" onclick="window.location.href='historique.php'">Historique</button>
-            </div>
-        </form>
-    </div>
 </body>
 </html>

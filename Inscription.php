@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page_d'inscription_FitTrack</title>
 <link rel="stylesheet" href="CSS/Design_Inscription_IMC.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
      <div id="id1"> <img class="cl12" src="img/LOGO.png" alt="Logo" height="50px"><h3><b>FitTrack</b></h3>
-        <header><a class="home" href="Application_IMC/home.html">Accueil</a>
-         <a class="con" href="Application_IMC/connexion.html">Se Connecter</a>
-            <a class="about" href="#">A Propos</a></header></div>
+        <header><a class="home" href="home.html">Accueil</a>
+         <a class="con" href="connection.php">Se Connecter</a>
+         </header></div>
     <h1><b>&nbsp;&nbsp;Inscrivez Vous</b></h1>
     <h2>&nbsp;&nbsp;&nbsp;Connaitre son IMC</h2>
     <P>Découvrez FitTrack , notre application innovante <br> qui calcule votre IMC 

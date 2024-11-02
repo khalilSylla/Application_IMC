@@ -1,5 +1,6 @@
 body{
     background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
+    
 }
 header{
     position: absolute;
@@ -45,7 +46,8 @@ header{
     font-size: 16px;
     font-family: Poppins;
     color: #fff;
-}#id3{
+}
+#id3{
     font-size: 16px;
     font-family: Poppins;
     color: #fff;
@@ -252,29 +254,62 @@ input{
     top: 10px;
 }
 .profile-container {
-    background-color: rgba(0, 0, 0, 0.32);
-    position: relative;
-    top: 530px;
-    left: 50%;
-    width: 620px;
-    height: 880px;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    width: 100%;
+    max-width: 650px; /* Largeur maximale augmentée */
+    margin: 0 auto;
+    padding: 15px; /* Padding réduit pour diminuer la hauteur */
+    background-color: #00000065;
     border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif; /* Police par défaut en Poppins */
 }
-.personal-info label {
-    margin-bottom: 5px; /* Réduit l'espace sous le label */
+
+.profile-container h2,
+.profile-container h4 {
+    font-family: 'Alfa Slab One', cursive; /* Police pour "Mon profil" */
+    margin-bottom: 15px; /* Marge réduite */
+    text-align: center;
+    top: -10px;
+    color: #f3d64c;
 }
-.personal-info input,
-.personal-info select {
-    margin-bottom: 20px; /* Espacement entre les champs */
+.profile-container input,
+.profile-container select{
+    top: -5px;
 }
-.action-buttons {
+.profile-container div input{
+    top: 3px;
+}
+.profile-container label, 
+.profile-container input, 
+.profile-container div, 
+.profile-container select, 
+.profile-container .center {
+    width: 100%; /* Assure que chaque champ prend toute la largeur du conteneur */
+    max-width: 99%; /* Évite le débordement des champs */
+    border-radius: 13px;
+    margin-bottom: 15px; /* Marge inférieure réduite pour compacter le design */
+}
+
+.profile-container .action-buttons {
+    font-family: 'Alfa Slab One', cursive; /* Police pour les boutons */
+    width: auto;
+    padding: 8px 16px; /* Padding ajusté */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.profile-container .center {
     display: flex;
-    gap: 20px; 
-    justify-content: center; /* Centre les boutons horizontalement */
+    justify-content: center;
+    gap: 8px; /* Espacement réduit entre les boutons */
+}
+.position_profil{
+    position: relative;
+    top: 100px;
+}
+.nouveau_mot_de_passe_div{
+    width: 650px;
 }

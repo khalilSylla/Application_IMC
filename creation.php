@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // var_dump($_POST);
     echo $id;
 
-    if ($id) {
+    if ($id ) {
         // Modification
-        $stmt = $PDO->prepare('UPDATE imc_calculateur SET POIDS = :poids, TAILLE = :taille, IMC = :imc, DATE_CALCUL = :date_calcul, ID_IMC = :id AND ID_UTILISATEUR=:id_user');
+        $stmt = $PDO->prepare('UPDATE imc_calculateur SET POIDS = :poids, TAILLE = :taille, IMC = :imc, DATE_CALCUL = :date_calcul WHERE ID_IMC = :id AND ID_UTILISATEUR=:id_user');
         $stmt->execute([
             ':poids' => $poids,
             ':taille' => $taille,
@@ -61,13 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':id' => $id_user,
             // ':notification' => $notification
         ]);
+        $id = $PDO->lastInsertId();
     }
-
 function deduireNotificationParId($id) {
     global $PDO;
 
-    // Récupérer l'entrée avec l'ID spécifié
-    $stmt = $PDO->prepare("SELECT imc, notification FROM imc_calculateur WHERE id_imc = ?");
+    $stmt = $PDO->prepare("SELECT IMC FROM imc_calculateur WHERE ID_IMC = ?");
     $stmt->execute([$id]);
     $entry = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -75,44 +74,35 @@ function deduireNotificationParId($id) {
         throw new Exception("Aucune entrée trouvée pour cet ID.");
     }
 
-    // Vérifier si la notification est déjà présente
-    if ($entry['notification'] !== null) {
-        return "La notification est déjà présente : " . $entry['notification'];
-    }
-
-    // Récupérer l'IMC
-    $imc = $entry['imc'];
-
+    $imc = $entry['IMC'];
     if ($imc < 18.5) {
-        $notification = 'Insuffisance pondérale';
-    } elseif ($imc >= 18.5 && $imc < 24.9) {
-        $notification = 'Poids normal';
-    } elseif ($imc >= 25 && $imc < 29.9) {
-        $notification = 'Surpoids';
-    } elseif ($imc >= 30 && $imc < 34.9) {
-        $notification = 'Obésité modérée';
-    } elseif ($imc >= 35 && $imc < 39.9) {
-        $notification = 'Obésité sévère';
+        $notification = 'sous-poids';
+    } elseif ($imc >= 18.5 && $imc <= 24.9) {
+        $notification = 'normal';
+    } elseif ($imc >= 25 && $imc <= 29.9) {
+        $notification = 'surpoids';
+    } elseif ($imc>= 30 && $imc <= 34.9) {
+        $notification = 'obesite';
     } else {
-        $notification = 'Obésité morbide';
+        $notification = 'extreme-obesite';
     }
+    
 
-    $updateStmt = $PDO->prepare("UPDATE imc_calculateur SET notification = ? WHERE id_imc = ?");
+    $updateStmt = $PDO->prepare("UPDATE imc_calculateur SET notification = ? WHERE ID_IMC = ?");
     $updateStmt->execute([$notification, $id]);
 
     return "La notification a été mise à jour : " . $notification;
 }
 
 try {
-    $id = 1;
     $resultat = deduireNotificationParId($id);
     echo $resultat;
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
 
-
-    header('Location: historique.php');
+header('Location: historique.php');
+exit;
 }
 ?>
 
@@ -123,20 +113,20 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter ou Modifier IMC</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <base href="Application_IMC">
+    <link rel="stylesheet" href="/CSS/style.css">
     <script src="JS/script.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div id="b1" class="tableau">
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px">
+        <img class="cl1" src="/img/battement-de-coeur (3).png" alt="Logo" height="45px">
         <h2><b>FitTrack</b></h2>
         <h1 id="c"><?php echo $user['prenom'], ' ', $user['nom'] ?></h1>
         <p class="c1"><?php echo $user['email'] ?></p>
         <div class="profile-container">
-            <i class="bi bi-person-circle profile-icon" style="color:#fff"></i>
+            <img src="img/utilisateur (3).png" alt="Profil" class="profile-icon" style="width: 64px; height: 64px; color: #fff;color:#fff">
             <ul class="dropdown-menu" id="profileMenu">
                 <li><a href="User_Profil.html" id="p1">Mon Profil</a></li>
                 <li><a href="home.html" id="p2">Deconnexion </a></li>

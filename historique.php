@@ -1,4 +1,5 @@
-<?php
+<!-- <?php
+session_start();
 require_once("db.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id_to_delete'])) {
     $idToDelete = $_POST['id_to_delete'];
@@ -31,7 +32,57 @@ $stmt->bindParam(':utilisateur_id', $utilisateur);
 $stmt->execute();
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+?> -->
+<?php
+session_start(); // Démarre la session
+
+require_once("db.php");
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['id_utilisateur'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: connexion.php");
+    exit();
+}
+
+// Utiliser l'ID de l'utilisateur connecté
+$utilisateur = $_SESSION['id_utilisateur'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id_to_delete'])) {
+    $idToDelete = $_POST['id_to_delete'];
+
+    // Préparer la requête pour supprimer l'entrée avec l'ID spécifié
+    $stmt = $PDO->prepare("DELETE FROM imc_calculateur WHERE ID_IMC = :id_to_delete AND id_utilisateur = :utilisateur_id");
+    $stmt->bindParam(':id_to_delete', $idToDelete);
+    $stmt->bindParam(':utilisateur_id', $utilisateur); // S'assurer que l'IMC appartient à l'utilisateur connecté
+    $stmt->execute();
+
+    // Rediriger l'utilisateur après la suppression
+    header("Location: " . $_SERVER['PHP_SELF']);
+}
+
+// Récupérer les résultats d'IMC de l'utilisateur
+$searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
+if ($searchQuery) {
+    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id AND (IMC LIKE :search OR DATE_CALCUL LIKE :search OR POIDS LIKE :search OR TAILLE LIKE :search) ORDER BY date_calcul DESC");
+    $searchQuery = '%' . $searchQuery . '%';
+    $stmt->bindParam(':search', $searchQuery);
+} else {
+    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id ORDER BY id_imc DESC, date_calcul DESC");
+}
+$stmt->bindParam(':utilisateur_id', $utilisateur);
+$stmt->execute();
+$imc_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$imc_results_json = json_encode($imc_results);
+
+// Récupérer les informations de l'utilisateur
+$stmt = $PDO->prepare("SELECT prenom, nom, email FROM utilisateur WHERE id_utilisateur = :utilisateur_id");
+$stmt->bindParam(':utilisateur_id', $utilisateur);
+$stmt->execute();
+
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,20 +90,21 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Utilisateur</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <base href="Application_IMC">
+    <link rel="stylesheet" href="/CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
         <div id="b1" class="tableau">
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px">
+        <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px">
         <h2><b>FitTrack</b></h2>
         <h1 id="c"><?php echo $user['prenom'], ' ', $user['nom'] ?></h1>
         <p class="c1"><?php echo $user['email'] ?></p>
         <div class="profile-container">
-            <i class="bi bi-person-circle profile-icon" style="color:#fff"></i>
+            <img src="img/utilisateur (3).png" alt="Profil" class="profile-icon" style="width: 64px; height: 64px; color: #fff;color:#fff">
+
             <ul class="dropdown-menu" id="profileMenu">
                 <li><a href="User_Profil.html" id="p1">Mon Profil</a></li>
                 <li><a href="home.html" id="p2">Deconnexion </a></li>
@@ -124,14 +176,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
 </script>
-    </div>
+</div>
     <div>
     <form method="GET" action="">
         <div class="search-bar">
             <input type="text" name="search" placeholder="Mots-cles">
             <input type="submit" name="valider" value="rechercher">
             </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    const searchQuery = "<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>";
+    
+    if (searchQuery) {
+        const rows = document.querySelectorAll('.table tbody tr');
+        
+        rows.forEach(row => {
+            row.querySelectorAll('td').forEach(cell => {
+                // Exclure les cellules qui contiennent des icônes ou autres éléments non textuels
+                if (!cell.querySelector('i') && !cell.querySelector('button') && !cell.querySelector('a')) {
+                    const originalText = cell.textContent; // Récupérer uniquement le texte brut
+                    const regex = new RegExp(searchQuery, 'gi');
+                    const highlightedText = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+                    cell.innerHTML = highlightedText; // Réinsérer le texte modifié sans toucher aux éléments HTML
+                }
+            });
+        });
+    }
+});
+
+        </script>    
         </form>
         </div>
     <section>
@@ -178,14 +253,20 @@ document.addEventListener('DOMContentLoaded', function () {
                             <td>
                                 <div class="icon-container" style="position: relative;display:flex;align-items:center">
                                 <a href="creation.php?id=<?php echo $imc['ID_IMC']; ?>" class="icon1">
-                                     <!-- <a href="creation.php?id=<?php echo $imc['ID_IMC']; ?>" class="icon1" style="margin-right:-55px;margin-left:120px"> -->
+                                <!-- <a href="creation/<?php echo $imc['ID_IMC']; ?>" class="icon1"> -->
+                                
+
+                                     <a href="creation.php?id=<?php echo $imc['ID_IMC']; ?>" class="icon1" style="margin-right:-55px;margin-left:120px">
                                         
-                                <i class="bi bi-pencil"></i>
+                               
+                                <img src="img/crayon (4).png" alt="Modifier" style="width: 24px; height: 24px;">
+                               
                                 </a>
                                 <form method="POST" action="" style="display: inline;">
                                     <input type="hidden" name="id_to_delete" value="<?php echo $imc['ID_IMC']; ?> ">
                                     <button type="submit" name="delete" class="icon2" style="border: none; background: none; cursor: pointer;">
-                                        <i class="bi bi-trash3-fill"></i>
+                                      
+                                        <img src="img/poubelle-de-recyclage (2).png" alt="Supprimer" style="width: 24px; height: 24px;">
                                     </button>
                                 </form>
                                 </div>

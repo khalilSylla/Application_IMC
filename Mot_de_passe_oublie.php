@@ -7,41 +7,63 @@ require_once "PHPMailer/src/SMTP.php";
 require_once "PHPMailer/src/Exception.php";
 // require_once 'vendor/autoload.php'; 
 require_once "db.php";
-
+$error = "";
 $debug = true;
 
-try {
-    $mail = new PHPMailer($debug);
-
-    if ($debug) {
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    }
-
-
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
+    $Code = rand(100000, 999999);
+    $stmt = $PDO->prepare("UPDATE utilisateur SET code_reinitialisation = ?, drapeau_reinitialisation = 1 WHERE email = ?");
+    $stmt->execute([$Code, $email]);
+    
+    if ($stmt->rowCount() > 0) {
+        $mail = new PHPMailer(true);
+        try {
+    
     $mail->isSMTP();
+    $mail->CharSet = "utf-8";
     $mail->SMTPAuth = true;
-    $mail->Host = "smtp.gmail.com";
-    $mail->Port = 465;
-    $mail->Username = "info.fittrack@gmail.com";
-    $mail->Password = "projet2024";
-    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-
+    $mail->SMTPSecure = 'tls';
     
-    $mail->setFrom('info.fittrack@gmail.com', 'FitTrack');
-    $mail->addAddress('seye10bineta@gmail.com', 'Binetou Rassoul Seye');
-
-    
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
     $mail->isHTML(true);
-    $mail->Subject = 'Objet de votre email';
-    $mail->Body    = 'Le texte de votre email en HTML.';
-    $mail->AltBody = 'Le texte comme simple élément textuel';
-
-    $mail->send();
-    echo "Message has been sent successfully";
     
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
+    $mail->Username = 'info.fittrack@gmail.com';
+    $mail->Password = 'vrpwksseuslhvars';
+    
+    $mail->setFrom('info.fittrack@gmail.com', 'Fittrack');
+    $mail->Subject = 'Réinitialisation de votre mot de passe';
+    $mail->MsgHTML("
+        <p>Bonjour,</p>
+        <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Utilisez le code suivant pour réinitialiser votre mot de passe :</p>
+        <h3 style='color: blue;'>$Code</h3>
+        <p>Veuillez entrer ce code sur la page de réinitialisation pour continuer le processus.</p>
+        <p>Si vous n'avez pas demandé de réinitialisation, vous pouvez ignorer cet email.</p>
+        <p>Cordialement,<br>L'équipe Fittrack</p>
+    ");
+    $mail->addAddress($email);
+    
+    $mail->send();
+            header("Location:Nouveau_mot_de_passe");
+            exit();
+        } catch (Exception $e) {
+            // $error = "";
+
+            // echo "Erreur d'envoi de mail : " . $mail->ErrorInfo;
+            $error = "Erreur d'envoi de mail : " . $mail->ErrorInfo;
+        }
+    } else {
+       
+        $error = "Aucun utilisateur trouvé avec cet e-mail.";
+    }
 }
 ?>
 
@@ -59,17 +81,21 @@ try {
 </head>
 <body>
     <div  id="id1" class="accueil"> 
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
+        <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2><b>FitTrack</b></h2>
     <h3>Mot de passe oublié</h3>
     <h4>Générer votre mot de passe</h4>
     <div>
         <form id="emailForm" method="post" action="">
             <label for="email">Email</label><br>
-            <input name="email" type="email" id="email" required>
+            <input name="email" type="email" id="email " required>
             <button type="submit">Valider</button>
-            <button type="button" class="bntNavbar" onclick="window.location.href='home.html';">Annuler</button>
+            <button type="button" class="bntNavbar2" onclick="window.location.href='home.html';">Annuler</button>
         </form>
-        <p class="pp2" style="margin-top: -150px;margin-right: 880px;font-size: 15px;">Veuillez entrer une adresse mail valide pour recevoir le code de verification</p>
+        
+<div class="error-message">
+            <?php echo $error; ?>
+        <!-- <div class="error-message"> <?php echo $error; ?> </div> -->
+        <p class="pp2" style="margin-top: -170px;margin-right: 75%;font-size: 15px;">Veuillez entrer une adresse mail valide <br> pour recevoir le code de verification</p>
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>
@@ -115,6 +141,13 @@ try {
                 color: #fff;
                 text-decoration: none;
             }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-top: 20px;
+            display: <?php echo empty($error) ? 'none' : 'block'; ?>;
+        }
         </style>
         <style>
             #emailError {
@@ -124,6 +157,10 @@ try {
             margin-left: 30px;
         }
         
+        
         </style>
     </div>
+    <div class="cl12"><img class="cl10" src="img/appel-telephonique (1).png" height="30px" alt="tel">123-456-789 </div>
+    <div class="cl13"><img class="cl11" src="img/email (1).png" height="30px" alt="adresse">info.fiitrack@gmail.com</div>
 </body>
+</html>

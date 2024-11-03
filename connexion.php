@@ -93,45 +93,93 @@ if (isset($_POST['email'], $_POST['password'])) {
     </style>
 </head>
 <body>
-    <div id="id1" class="accueil"> 
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
-        <div class="menu">
-            <ul>
-                <li><a href="home.html"><b>Accueil</b></a></li>
-                <li><a href="inscription.php"><b>S'inscrire</b></a></li>
-            </ul>
-        </div>
-        
-        <main>
-            <section class="desc">
-                <div class="heroNo">
-                    <h3>Connectez-vous</h3>
-                    <h4>Connaître son IMC</h4>
-                    <p class="lole"> Découvrez FitTrack, notre application innovante <br>
-                        qui calcule votre IMC, suit votre santé et vous
-                        aide <br>à atteindre vos objectifs de bien-être en <br>
-                        toute simplicité 
-                    </p>
-                </div>
-            </section>
-            <section class="login-formNo">
-                <div>
-                    <form method="post" action="connexion.php">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" required>
-                        <label for="password">Entrez votre Mot de passe</label>
-                        <input type="password" name="password" required>
-                        <button type="submit" class="bntNavbars">Se Connecter</button>
-                        <button type="button" class="bntNavbar" onclick="window.location.href='home.html';">Annuler</button>
-                    </form>
-                    <div class="btn">
-                        <div class="forget-pass">
-                            <a href="Mot_de_passe_oublie.html">Mot de passe oublié ?</a>
+    <div  id="id1" class="accueil"> 
+            <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2><b>FitTrack</b></h2>
+            <div class="menu">
+                <ul>
+                    <li><a href="home.html"><b>Accueil</b></a></li>
+                    <!-- <li><a href="connexion.html"><b>Se connecter</b></a></li> -->
+                     
+                      <!-- <li><a href="home.html">Se Déconnecter</a></li> -->
+                      
+                </ul>
+            </div>
+            <style>
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    float: left;
+
+
+                }
+
+                ul li {
+                    float: left;
+                    list-style: none;
+                    margin-left: 60px;
+                    margin-top: 27px;
+                    font-size: 15px;
+                    font-family: Poppins;
+
+                }
+
+                li a {
+                    display: block;
+                    color: #fff;
+                    text-align: center;
+                    padding: 16x;
+                    margin-right: 30px;
+                    text-decoration: none;
+                    font-size: 15px; 
+                    display: inline-block;
+                }
+
+                li a:hover {
+                    background-color: transparent;
+                    color: #fff;
+                    text-decoration: none;
+                }
+            </style>
+               <main>
+                <section class="desc">
+                    <div class="heroNo">
+                        <h3>Connecter Vous</h3>
+                        <h4>Connaitre son IMC</h4>
+                        <p class="lole"> Découvrez FitTrack , notre application innovante
+                            qui calcule votre IMC , suit votre sante et vous
+                            aide à atteindre vos objectifs de bien-être en
+                            toute simplicité 
+                            S'inscrire
+                            Mot de passe oublier
+                            FitTrack
+                        </p>
+                        
+
+                    </div>
+                </section>
+                <section class="login-formNo">
+                    <div>
+                        <form method="post" action="connexion.php">
+                            <label for="email">Email</label><br>
+                            <input type="email" name="email" required>
+                            <label for="password">Entre votre Mot de passe</label><br>
+                            <input type="password" name="password" required>
+                            <button type="submit" class="bntNavbarss">Se Connecter</button>
+                            <button type="button" class="bntNavbar1" onclick="window.location.href='home.html';">Annuler</button>
+                        </form>
+                        <div class="btn">
+                       <div class="forget-pass">
+                            <a href="Mot_de_passe_oublie.html"> Mot de passe oublier ?</a>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
-    </div>
-</body>
-</html>
+                    
+                </section>
+            
+            </main>
+            <div class="cl12"><img class="cl10" src="img/appel-telephonique (1).png" height="30px" alt="tel">123-456-789 </div>
+            <div class="cl13"><img class="cl11" src="img/email (1).png" height="30px" alt="adresse">info.fiitrack@gmail.com</div>
+        </body>
+        </html>
+   

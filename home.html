@@ -8,14 +8,31 @@
     <link rel="stylesheet" href="CSS/style.css">
     <script src="JS/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <script>
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const email = emailInput.value;
+            
+            // Expression régulière pour vérifier un email valide
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "L'adresse email n'est pas valide.";
+                return false; // Empêche l'envoi du formulaire
+            } else {
+                emailError.textContent = ""; // Si tout est correct, vider l'erreur
+                return true; // Autorise l'envoi du formulaire
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div  id="id1" class="accueil"> 
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
-    <h3>Calculer votre Indice de masse corporelle</h3>
-    <h4>Entrer vos informations personnelles</h4>
+        <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2><b>FitTrack</b></h2>
+    <h3>&nbsp;Calculer votre Indice de masse corporelle</h3>
+    <h4>&nbsp;&nbsp;&nbsp;&nbsp;Entrer vos informations personnelles</h4>
     <section>
         <form id="myform">
             <div class="b1">
@@ -33,29 +50,24 @@
                 <label for="Age">Age</label><br>
                 <input type="text" id="Age" placeholder="Entrer votre age"></input><br>
                 <label for="genre" placeholder="">Genre</label>
-                <div id = "erreur"></div>
+                <!-- <div id = "erreur"></div> -->
                 <select id="genre" name="genre"><br>
                     <option> </option>
                     <option value="homme">Homme</option>
                     <option value="femme">Femme</option>
                 </select>
+                <!-- <div id = "erreur"></div> -->
             </div>
            
         </form>
-        
-        
+        <div id = "erreur" style="color:red;margin-left: 20px;"></div>
         <section>
             <div class="menu">
                 <ul>
                     <li><a href="home.html"><b>Accueil</b></a></li>
-<<<<<<< HEAD
-                    <li><a href="connexion.php"><b>Se connecter</b></a></li>
-                    <li><a href="#"><b>A propos</b></a></li>
-=======
-                    <li><a href="connexion.html"><b>Se connecter</b></a></li>
-                     
-                      <li><a href="home.html">Se Déconnecter</a></li>
->>>>>>> b99607e1543ff3b5e77a88e091603c897ac33a44
+                    <!-- <li><a href="connexion.html"><b>Se connecter</b></a></li> -->
+                    <li><a href="home.html"><b>Se Deconnecter</b></a></li>
+
                 </ul>
             </div>
             <style>
@@ -96,12 +108,16 @@
                     text-decoration: none;
                 }
             </style>
-            <a href="#"  class="boutton" onclick="calculerIMC()" id="submit"><strong>Calculer mon IMC</strong></a>
+            <!-- <a href="#"  class="boutton" onclick="calculerIMC()" id="submit"><strong>Calculer mon IMC</strong></a> -->
+            <button type="button" class="boutton" onclick="calculerIMC()" id="submit">
+                <strong>Calculer mon IMC</strong>
+            </button>
+            
             <span id="resultat"></span>
             <p>Si vous souhaitez vous inscrire directement ou <br> vous connectez , appuyer sur:</p>
-            <a class="Inscription" href="Inscription.php"><strong>S'inscrire</strong></a>
-            <a class="Connexion" href="connexion.php"><strong>Se connecter</strong></a>
-        </section>
+            <button onclick="window.location.href='/Inscription'" type="button" id="inscrire" class="cl6">S'inscrire</button>
+            <button onclick="window.location.href='/connexion'" type="button" id="connexion" class="bntNavbars">Se Connecter</button>
+
     </section>
 </body>
 

@@ -1,6 +1,6 @@
 body{
     background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
-    
+    overflow-x: hidden;
 }
 header{
     position: absolute;

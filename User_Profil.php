@@ -15,7 +15,7 @@ $idUtilisateur = $_SESSION['idUtilisateur'];
 require_once("db1.php");
 
 // Requête pour récupérer les informations de l'utilisateur, y compris le mot de passe haché
-$queryUtilisateur = "SELECT PRENOM, NOM, EMAIL, DATE_DE_NAISSANCE, ID_GENRE, MOTS_DE_PASSE FROM utilisateur WHERE ID_UTILISATEUR = :id";
+$queryUtilisateur = "SELECT PRENOM, NOM, EMAIL, DATE_DE_NAISSANCE, ID_GENRE, MOT_DE_PASSE FROM utilisateur WHERE ID_UTILISATEUR = :id";
 $stmtUtilisateur = $connectionbd->prepare($queryUtilisateur);
 $stmtUtilisateur->bindParam(':id', $idUtilisateur, PDO::PARAM_INT);
 $stmtUtilisateur->execute();
@@ -48,7 +48,7 @@ if ($stmtUtilisateur->rowCount() > 0) {
     $prenom = $user['PRENOM'] ?? '';
     $nom = $user['NOM'] ?? '';
     $email = $user['EMAIL'] ?? '';
-    $motDePasseHash = $user['MOTS_DE_PASSE'] ?? ''; // Récupérer le mot de passe haché
+    $motDePasseHash = $user['MOT_DE_PASSE'] ?? ''; // Récupérer le mot de passe haché
 } else {
     echo "Erreur : Impossible de récupérer les informations de l'utilisateur";
     exit;
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($ancienMotDePasseHash === $motDePasseHash) {
             // Hacher et mettre à jour le nouveau mot de passe
             $nouveauMotDePasseHash = hash('sha256', $nouveauMotDePasse);
-            $queryUpdatePassword = "UPDATE utilisateur SET MOTS_DE_PASSE = :newPassword WHERE ID_UTILISATEUR = :id";
+            $queryUpdatePassword = "UPDATE utilisateur SET MOT_DE_PASSE = :newPassword WHERE ID_UTILISATEUR = :id";
             $stmtUpdatePassword = $connectionbd->prepare($queryUpdatePassword);
             $stmtUpdatePassword->bindParam(':newPassword', $nouveauMotDePasseHash, PDO::PARAM_STR);
             $stmtUpdatePassword->bindParam(':id', $idUtilisateur, PDO::PARAM_INT);
@@ -139,39 +139,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil utilisateur</title>
-    <link rel="stylesheet" href="CSS/Design_Inscription_IMC.css">
+    <link rel="stylesheet" href="CSS/User_profil_Design.css">
     <!-- Lien vers Google Fonts pour les polices Alfa Slab One et Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <script>
-        // Fonction pour activer/désactiver les champs du formulaire
-        function activerModification() {
-            document.getElementById('prenom').disabled = false;
-            document.getElementById('nom').disabled = false;
-            document.getElementById('genre').disabled = false;
-            document.getElementById('date_naissance').disabled = false;
-            document.getElementById('ancien_mot_de_passe').disabled = false; // Activer le champ ancien mot de passe
-            document.getElementById('modifier').style.display = 'none';
-            document.getElementById('sauvegarder').style.display = 'inline';
-            
-            // Appeler la fonction pour vérifier si l'ancien mot de passe a été rempli
-            afficherNouveauMotDePasse();
+    // Fonction pour activer/désactiver les champs du formulaire
+    function activerModification() {
+        document.getElementById('prenom').disabled = false;
+        document.getElementById('nom').disabled = false;
+        document.getElementById('genre').disabled = false;
+        document.getElementById('date_naissance').disabled = false;
+        document.getElementById('ancien_mot_de_passe').disabled = false; // Activer le champ ancien mot de passe
+        document.getElementById('modifier').style.display = 'none';
+        document.getElementById('sauvegarder').style.display = 'inline';
+        
+        afficherNouveauMotDePasse();
+    }
+
+    // Fonction pour afficher le champ "Nouveau mot de passe" lorsque l'ancien est rempli
+    function afficherNouveauMotDePasse() {
+        var ancienMotDePasse = document.getElementById('ancien_mot_de_passe').value;
+        var nouveauMotDePasseDiv = document.getElementById('nouveau_mot_de_passe_div');
+
+        if (ancienMotDePasse.length > 0) {
+            nouveauMotDePasseDiv.style.display = 'block';
+            document.getElementById('nouveau_mot_de_passe').disabled = false;
+        } else {
+            nouveauMotDePasseDiv.style.display = 'none';
+            document.getElementById('nouveau_mot_de_passe').disabled = true;
+        }
+    }
+
+    // Fonction de validation avant la soumission du formulaire
+    function validerFormulaire() {
+        var ancienMotDePasse = document.getElementById('ancien_mot_de_passe').value;
+        var nouveauMotDePasse = document.getElementById('nouveau_mot_de_passe').value;
+
+        // Si l'ancien mot de passe est rempli mais pas le nouveau, afficher une alerte
+        if (ancienMotDePasse.length > 0 && nouveauMotDePasse.length === 0) {
+            alert("Veuillez remplir le champ 'Nouveau mot de passe'.");
+            return false; // Empêcher la soumission du formulaire
         }
 
-        // Fonction pour afficher le champ "Nouveau mot de passe" lorsque l'ancien est rempli
-        function afficherNouveauMotDePasse() {
-            var ancienMotDePasse = document.getElementById('ancien_mot_de_passe').value;
-            var nouveauMotDePasseDiv = document.getElementById('nouveau_mot_de_passe_div');
+        return true; // Permettre la soumission du formulaire
+    }
+</script>
 
-            // Si l'ancien mot de passe est rempli, afficher le champ pour le nouveau mot de passe
-            if (ancienMotDePasse.length > 0) {
-                nouveauMotDePasseDiv.style.display = 'block';
-                document.getElementById('nouveau_mot_de_passe').disabled = false; // Activer le champ nouveau mot de passe
-            } else {
-                nouveauMotDePasseDiv.style.display = 'none';
-                document.getElementById('nouveau_mot_de_passe').disabled = true; // Désactiver le champ nouveau mot de passe
-            }
-        }
-    </script>
 
 </head>
 <body>
@@ -214,22 +227,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="ancien_mot_de_passe">Ancien mot de passe</label>
             <input type="password" id="ancien_mot_de_passe" name="ancien_mot_de_passe" oninput="afficherNouveauMotDePasse()" disabled>
-
-            <div id="nouveau_mot_de_passe_div" style="display:none;">
-            <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
-            <input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe" disabled>
-           </div>
-
-        
-
-        <!-- Message d'erreur pour l'ancien mot de passe -->
+            <!-- Message d'erreur pour l'ancien mot de passe -->
         <?php if (!empty($erreurMotDePasse)): ?>
             <p style="color:red;"><?= htmlspecialchars($erreurMotDePasse) ?></p>
         <?php endif; ?>
-
+            <div id="nouveau_mot_de_passe_div" style="display:none;">
+            <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+            <input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe"  disabled>
+           </div>
         <div class="center">
             <button type="button" class="cl6" id="modifier" onclick="activerModification()">Modifier</button>
-            <button type="submit" class="cl6" id="sauvegarder" style="display:none;">Sauvegarder</button>
+            <button type="submit" class="cl6" id="sauvegarder" style="display:none;" onclick="return validerFormulaire()">Sauvegarder</button>
+            <button type="button" class="cl6" onclick="window.location.href='historique.php';" id="Page_historique" >Historique IMC</button>
         </div>
     </form>
  </section>

@@ -937,97 +937,75 @@ text-decoration: none;
 color: black;
 font-size: 18px;
                  
-}
-ul{
-display: flex;
-}
-li{
-margin: 0 16px;
-list-style-type: none;
-}
-.linkNavbar{
-text-decoration: none;
-color: #000000;
-font-size: 18px;
-}
-.bntNavbar, .linkNavbar{
-font-size: 20px;
-font-weight: 500;
-}
-.login-form {
-    padding: 20px;
-border-radius: 10px;
-font-size: 18px;
-border-radius: 10px;
-position: absolute;
-top: 18%;
-right: 100px;
-font-weight: 800;
-max-width: 58%;
-box-shadow: #fff;
-border: 1px solid black;
-}
-section label {
-display: block;
-color: white;       
-}
-section input {
-padding: 10px;
-margin-bottom: 15px;
-border: 1px solid #ccc;
-border-radius: 5px;
-width: 560px;
-font-size: 17px;
-opacity: 0.80;
-border-radius: 13px;
-}
-.desc{
-width: 50%;
-margin-inline: 20px;
-}
-main {
-margin-top: 100px;
-display: flex;
-}
-#emailForm [type="submit"]{
-margin-top: 80px;
-color: #004aad;
-background-color: #f3d64c;
-font-family: Alfa Slab One;
-height: 45px;
-font-size: 17px;
-border-radius: 54px;
-}
-#emailForm1 [type="submit"]{
-    margin-top: 20px;
-    color: #004aad;
-    background-color: #f3d64c;
-    font-family: Alfa Slab One;
-    height: 45px;
-    font-size: 17px;
-    border-radius: 64px;
-    }
-    mark {
-        background-color: yellow;
-        font-weight: bold;
-    }
-    .highlight {
-        background-color: yellow; /* ou une autre couleur de votre choix */
-        font-weight: bold;
-    }
-    /* #error-message {
-        color: red;
-        font-weight: bold;
-        margin-top: 20px;
-        text-align: center;
-        padding: 10px;
-        border: 1px solid red;
-        border-radius: 5px;
-        background-color: #ffe6e6;
-    } */
-    
-    
-    
+             }
+             ul{
+                 display: flex;
+             }
+             li{
+                margin: 0 16px;
+                 list-style-type: none;
+             }
+             .linkNavbar{
+                 text-decoration: none;
+                 color: #000000;
+                 font-size: 18px;
+             }
+             .bntNavbar, .linkNavbar{
+                 font-size: 20px;
+                 font-weight: 500;
+             
+                 }
+                 .login-form {
+                     
+                     padding: 20px;
+                     border-radius: 10px;
+                     font-size: 18px;
+                     border-radius: 10px;
+                     position: absolute;
+                     top: 18%;
+                     right: 100px;
+                     font-weight: 800;
+                     max-width: 58%;
+                     box-shadow: #fff;
+                     border: 1px solid black;
+                 }
+                 
+                 section label {
+                     display: block;
+                     color: white;       
+                 }
+                 
+                 section input {
+                     padding: 10px;
+                     margin-bottom: 15px;
+                     border: 1px solid #ccc;
+                     border-radius: 5px;
+                     width: 560px;
+                     font-size: 17px;
+                     opacity: 0.80;
+                       border-radius: 13px;
+                 }
+             
+             
+             .desc{
+                 width: 50%;
+                 margin-inline: 20px;
+             }
+             
+             main {
+                 margin-top: 100px;
+                 display: flex;
+             }
+             #emailForm [type="submit"]{
+                margin-top: 80px;
+                color: #004aad;
+                 background-color: #f3d64c;
+                 font-family: Alfa Slab One;
+                 height: 45px;
+                 font-size: 17px;
+                 border-radius: 54px;
+
+             }
 
 
 

@@ -11,7 +11,7 @@
 <body>
      <div id="id1"> <img class="cl12" src="img/LOGO.png" alt="Logo" height="50px"><h3><b>FitTrack</b></h3>
         <header><a class="home" href="home.html">Accueil</a>
-         <a class="con" href="connection.php">Se Connecter</a>
+         <a class="con" href="connexion.php">Se Connecter</a>
          </header></div>
     <h1><b>&nbsp;&nbsp;Inscrivez Vous</b></h1>
     <h2>&nbsp;&nbsp;&nbsp;Connaitre son IMC</h2>

@@ -840,20 +840,7 @@ margin-left: 75px;
                  font-weight: 500;
              
                  }
-                 .login-form {
-                     
-                     padding: 20px;
-                     border-radius: 10px;
-                     font-size: 18px;
-                     border-radius: 10px;
-                     position: absolute;
-                     top: 18%;
-                     right: 100px;
-                     font-weight: 800;
-                     max-width: 58%;
-                     box-shadow: #fff;
-                     border: 1px solid black;
-                 }
+                
                  
                  section label {
                      display: block;

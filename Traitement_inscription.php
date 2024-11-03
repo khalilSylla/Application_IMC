@@ -17,13 +17,13 @@ if (isset($_POST["envoyer"])) {
     if ($checkUser->rowCount() > 0) {
         // Utilisateur existe déjà : affiche une alerte et redirige
         echo "<script>
-                alert('Cet utilisateur existe déjà.');
+                alert('Cet utilisateur existe déjà. Veuillez vous connecter');
                 window.location.href = 'connexion.php';
               </script>";
         exit; // Arrête le script après l'alerte
     } else {
         // Insérer les données dans la table utilisateur
-        $sql = "INSERT INTO `utilisateur`(`NOM`, `PRENOM`, `EMAIL`, `MOTS_DE_PASSE`, `ID_GENRE`)
+        $sql = "INSERT INTO `utilisateur`(`NOM`, `PRENOM`, `EMAIL`, `MOT_DE_PASSE`, `ID_GENRE`)
                 VALUES (:nom, :prenom, :email, :mdph , :genre)";
         $stml = $connectionbd->prepare($sql);
         
@@ -34,12 +34,15 @@ if (isset($_POST["envoyer"])) {
         $stml->bindParam(':genre', $genre);
 
         if ($stml->execute()) {
-            echo "Inscription réussie. Redirection vers la page de connexion dans 10 secondes...";
-            header("Refresh: 10; url=connexion.php?inscription=ok");
+            // Alerte de succès et redirection immédiate
+            echo "<script>
+                    alert('Inscription réussie. Vous allez être redirigé vers la page de connexion.');
+                    window.location.href = 'connexion.php?inscription=ok';
+                  </script>";
+            exit; // Arrête le script après l'alerte
         } else {
             echo "L'inscription a échoué.";
         }
     }
 }
 ?>
-

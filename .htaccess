@@ -1,0 +1,10 @@
+
+# Réécrire l'URL /resultat/imc/[valeur_imc]/text/[valeur_texte]
+RewriteRule ^resultat/imc/([0-9\.]+)/text/(.+)$ resultat.html?imc=$1&text=$2 [L,QSA]
+
+# Réécrire /inscription vers Inscription.php
+RewriteRule ^inscription$ Inscription.php [L]
+
+# Réécrire /connexion vers Connexion.php
+RewriteRule ^connexion$ connexion.php [L]
+

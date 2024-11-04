@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-    background-image: linear-gradient(to right, #5de0e6, #004aad);
+    background-image: linear-gradient(to right, #393bcf, #051f42);
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
 }
 
 header {
@@ -9,36 +14,22 @@ header {
     font-family: Poppins;
 }
 
-.home {
+.home, .con, .about {
     position: relative;
-    right: 20px;
     font-family: Poppins;
     color: #fff;
     font-size: 15px;
     text-decoration: none;
 }
 
-.con {
-    position: relative;
-    left: 20px;
-    font-family: Poppins;
-    color: #fff;
-    font-size: 15px;
-    text-decoration: none;
-}
-
-.about {
-    position: relative;
-    left: 50px;
-    font-family: Poppins;
-    color: #fff;
-    font-size: 15px;
-    text-decoration: none;
-}
+.home { right: 20px; }
+.con { left: 20px; }
+.about { left: 50px; }
 
 .cl12 {
     position: absolute;
     top: 5px;
+    vertical-align: middle;
 }
 
 #id2 {
@@ -69,41 +60,40 @@ header {
     max-width: 650px;
     margin: 0 auto;
     padding: 15px;
-    background-color: #00000065;
+    background-color: #00000073;
     border-radius: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
 }
 
-.profile-container h2,
-.profile-container h4 {
+.profile-container h3, .profile-container h4 {
     font-family: 'Alfa Slab One', cursive;
     margin-bottom: 15px;
     text-align: center;
-    top: -10px;
     color: #f3d64c;
 }
 
-.profile-container input,
-.profile-container select {
-    top: -5px;
+.profile-container label {
+    width: 100%;
+    max-width: 99%;
+    border-radius: 15px;
+    margin-bottom: -10px;
+    height: 40px;
 }
-
-.profile-container div input {
-    top: 3px;
-}
-
-.profile-container label,
-.profile-container input,
-.profile-container div,
-.profile-container select,
-.profile-container .center {
+.profile-container input, .profile-container select {
     width: 100%;
     max-width: 99%;
     border-radius: 20px;
     margin-bottom: 15px;
     height: 40px;
+    font-size: 18px;
+    color: #051f42; /* Texte bleu dans les inputs */
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-container input::placeholder, .profile-container select::placeholder {
+    color: #051f42; /* Placeholder bleu */
 }
 
 .profile-container .action-buttons {
@@ -123,12 +113,27 @@ header {
 .nouveau_mot_de_passe_div {
     width: 650px;
 }
-.cl6{
+
+.cl6 {
     width: 191px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
-    font-family: Alfa Slab One;
+    font-family: 'Alfa Slab One', cursive;
     height: 40px;
     font-size: 17px;
-    border-radius: 54px;
+    border-radius: 15px;
+}
+
+h2 {
+    color: white;
+    font-family: 'Alfa Slab One', cursive;
+    display: inline-block;
+    margin-left: 60px;
+    vertical-align: middle;
+    position: relative;
+    top: -20px;
+}
+.ereur_mdpa{
+    position: relative;
+    top: -20px;
 }

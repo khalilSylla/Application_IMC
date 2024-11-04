@@ -2,14 +2,14 @@
 session_start(); // Démarrer la session
 
 // Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['idUtilisateur'])) {
+if (!isset($_SESSION['id_utilisateur'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit();
 }
 
 // Récupérer l'ID de l'utilisateur connecté depuis la session
-$idUtilisateur = $_SESSION['idUtilisateur'];
+$id_utilisateur = $_SESSION['id_utilisateur'];
 
 // Inclure le fichier de connexion à la base de données
 require_once("db1.php");
@@ -17,7 +17,7 @@ require_once("db1.php");
 // Requête pour récupérer les informations de l'utilisateur, y compris le mot de passe haché
 $queryUtilisateur = "SELECT PRENOM, NOM, EMAIL, DATE_DE_NAISSANCE, ID_GENRE, MOT_DE_PASSE FROM utilisateur WHERE ID_UTILISATEUR = :id";
 $stmtUtilisateur = $connectionbd->prepare($queryUtilisateur);
-$stmtUtilisateur->bindParam(':id', $idUtilisateur, PDO::PARAM_INT);
+$stmtUtilisateur->bindParam(':id', $id_utilisateur, PDO::PARAM_INT);
 $stmtUtilisateur->execute();
 
 // Initialiser des valeurs par défaut
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si des champs ont été modifiés, exécuter la requête d'UPDATE
     if (!empty($champsModifies)) {
         $queryUpdateUser = "UPDATE utilisateur SET " . implode(', ', $champsModifies) . " WHERE ID_UTILISATEUR = :id";
-        $params[':id'] = $idUtilisateur;
+        $params[':id'] = $id_utilisateur;
 
         $stmtUpdateUser = $connectionbd->prepare($queryUpdateUser);
         foreach ($params as $param => $value) {
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $queryUpdatePassword = "UPDATE utilisateur SET MOT_DE_PASSE = :newPassword WHERE ID_UTILISATEUR = :id";
             $stmtUpdatePassword = $connectionbd->prepare($queryUpdatePassword);
             $stmtUpdatePassword->bindParam(':newPassword', $nouveauMotDePasseHash, PDO::PARAM_STR);
-            $stmtUpdatePassword->bindParam(':id', $idUtilisateur, PDO::PARAM_INT);
+            $stmtUpdatePassword->bindParam(':id', $id_utilisateur, PDO::PARAM_INT);
             $stmtUpdatePassword->execute();
 
             // Redirection après mise à jour réussie
@@ -171,26 +171,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Fonction de validation avant la soumission du formulaire
+    // Fonction de validation avant la soumission du formulaire
     function validerFormulaire() {
         var ancienMotDePasse = document.getElementById('ancien_mot_de_passe').value;
         var nouveauMotDePasse = document.getElementById('nouveau_mot_de_passe').value;
+        var erreurLongueurMotDePasse = document.getElementById('erreurLongueurMotDePasse');
+    
+    // Réinitialiser le message d'erreur
+        erreurLongueurMotDePasse.textContent = "";
 
-        // Si l'ancien mot de passe est rempli mais pas le nouveau, afficher une alerte
+    // Si l'ancien mot de passe est rempli mais pas le nouveau, afficher une alerte
         if (ancienMotDePasse.length > 0 && nouveauMotDePasse.length === 0) {
             alert("Veuillez remplir le champ 'Nouveau mot de passe'.");
-            return false; // Empêcher la soumission du formulaire
-        }
-
-        return true; // Permettre la soumission du formulaire
+        return false; // Empêcher la soumission du formulaire
     }
+
+    // Vérifier le nombre minimum de caractères pour le nouveau mot de passe
+    if (nouveauMotDePasse.length > 0 && nouveauMotDePasse.length < 8) {
+        erreurLongueurMotDePasse.textContent = "Le mot de passe doit contenir au minimum huit caractères";
+        return false; // Empêcher la soumission du formulaire
+    }
+
+    return true; // Permettre la soumission du formulaire
+}
+
 </script>
 
 
 </head>
 <body>
     <div id="id1">
-        <img class="cl12" src="img/LOGO.png" alt="Logo" height="50px">
-        <h3><b>FitTrack</b></h3>
+    <img class="cl12" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2>FitTrack</h2>
         <header>
             <a class="home" href="Application_IMC/home.html">Accueil</a>
             <a class="con" href="deconnexion.php">Se Déconnecter</a>
@@ -199,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
  <section class="position_profil">
  <form class="profile-container" method="post">
-        <h2 style="font-family: 'Alfa Slab One', cursive;">Mon profil</h2>
+        <h3 style="font-family: 'Alfa Slab One', cursive;">Mon profil</h3>
 
         <label for="prenom">Prénom</label>
         <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($prenom) ?>" disabled>
@@ -229,11 +240,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" id="ancien_mot_de_passe" name="ancien_mot_de_passe" oninput="afficherNouveauMotDePasse()" disabled>
             <!-- Message d'erreur pour l'ancien mot de passe -->
         <?php if (!empty($erreurMotDePasse)): ?>
-            <p style="color:red;"><?= htmlspecialchars($erreurMotDePasse) ?></p>
+            <p class="ereur_mdpa" style="color:red;"><?= htmlspecialchars($erreurMotDePasse) ?></p>
         <?php endif; ?>
-            <div id="nouveau_mot_de_passe_div" style="display:none;">
+            <div id="nouveau_mot_de_passe_div" class="nouveau_mot_de_passe_div" style="display:none;">
             <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
             <input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe"  disabled>
+            <span id="erreurLongueurMotDePasse" style="color:red;"></span>
            </div>
         <div class="center">
             <button type="button" class="cl6" id="modifier" onclick="activerModification()">Modifier</button>

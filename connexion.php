@@ -18,9 +18,9 @@ if (isset($_POST['email'], $_POST['password'])) {
         // Comparer le mot de passe haché saisi avec celui dans la base de données
         if ($hashedPasswordInput === $user['MOT_DE_PASSE']) {
             // Enregistrer l'ID de l'utilisateur dans la session
-            $_SESSION['idUtilisateur'] = $user['ID_UTILISATEUR'];
+            $_SESSION['id_utilisateur'] = $user['ID_UTILISATEUR'];
             // Rediriger vers la page de profil utilisateur
-            header('Location: User_profil.php');
+            header('Location:User_profil.php');
             exit();
         } else {
             $error = "Mot de passe incorrect";
@@ -102,7 +102,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 </head>
 <body>
     <div id="id1" class="accueil"> 
-        <img class="cl1" src="img/LOGO.png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
+    <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2><b>FitTrack</b></h2>
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>
@@ -129,12 +129,15 @@ if (isset($_POST['email'], $_POST['password'])) {
                         <input type="email" name="email" required>
                         <label for="password">Entrez votre Mot de passe</label>
                         <input type="password" name="password" required>
+                        <?php if ($error): ?>
+                            <p class="error-message"><?= $error; ?></p>
+                        <?php endif; ?>
                         <button type="submit" class="bntNavbars">Se Connecter</button>
                         <button type="button" class="bntNavbar" onclick="window.location.href='home.html';">Annuler</button>
                     </form>
                     <div class="btn">
                         <div class="forget-pass">
-                            <a href="Mot_de_passe_oublie.html">Mot de passe oublié ?</a>
+                            <a href="Mot_de_passe_oublie.php">Mot de passe oublié ?</a>
                         </div>
                     </div>
                     

@@ -23,8 +23,11 @@ if (isset($_POST["envoyer"])) {
         exit; // Arrête le script après l'alerte
     } else {
         // Insérer les données dans la table utilisateur
-        $sql = "INSERT INTO `utilisateur`(`NOM`, `PRENOM`, `EMAIL`, `MOT_DE_PASSE`, `ID_GENRE`)
-                VALUES (:nom, :prenom, :email, :mdph , :genre)";
+        $sql = "INSERT INTO `utilisateur`(`NOM`, `PRENOM`, `EMAIL`, `MOT_DE_PASSE`, `ID_GENRE`, `code_reinitialisation`,
+         `drapeau_reinitialisation`)
+                VALUES (:nom, :prenom, :email, :mdph , :genre, :cd_rnt, :dr_rnt)";
+        $cd_rnt=0;
+        $dr_rnt=0;        
         $stml = $connectionbd->prepare($sql);
         
         $stml->bindParam(':nom', $nom);
@@ -32,6 +35,8 @@ if (isset($_POST["envoyer"])) {
         $stml->bindParam(':email', $email);
         $stml->bindParam(':mdph', $mdph);
         $stml->bindParam(':genre', $genre);
+        $stml->bindParam(':cd_rnt', $cd_rnt);
+        $stml->bindParam(':dr_rnt', $dr_rnt);
 
         if ($stml->execute()) {
             // Alerte de succès et redirection immédiate

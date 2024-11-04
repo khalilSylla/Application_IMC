@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 body{
-    background-image: linear-gradient(to right ,#5de0e6 ,#004aad);
+    /* background-image: linear-gradient(to right,#5de0e6 ,#004aad); */
+    background-image: linear-gradient(to right,#393bcf ,#051f42);
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
     overflow-x: hidden;
 }
 header{
@@ -134,12 +139,12 @@ header{
 #genre{
     height: 45px;
     font-family: Poppins;
-    color: #004aad;
+    color:#051f42 ;
     width: 570px;
 }
 .cl6{
     width: 191px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
     font-family: Alfa Slab One;
     height: 45px;
@@ -151,7 +156,7 @@ header{
     left: 185px;
     width: 191px;
     height: 45px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
     font-family: Alfa Slab One;
     font-size: 17px;

@@ -132,7 +132,7 @@ input[type="text"] {
     font-size: 15px;
     border-radius: 13px;
     opacity:0.8;
-    color: #004aad;
+    color: #051f42;
     transition: border-color 0.3s;
 
 }
@@ -147,12 +147,12 @@ select{
 }
 #genre{
     font-family: Poppins;
-    color: #004aad;
+    color: #051f42;
 }
 .boutton{
    background-color:#f3d64c;
    border: none;
-   color: #004aad;
+   color: #051f42;
    padding:18px;
    text-align: center;
    text-decoration: none;
@@ -199,7 +199,7 @@ p{
 }
 .cl6{
 width: 191px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
     font-family: Alfa Slab One;
     height: 45px;
@@ -209,7 +209,7 @@ width: 191px;
 }
 #inscrire{
     margin: 1px 35px;
-    margin-left: 1000px;
+    margin-left: 860px;
     position: relative;
     top: -180px;
 
@@ -218,7 +218,7 @@ width: 191px;
 #connexion {
     position: relative;
     top: -225px; 
-    margin-left: 1250px;
+    margin-left: 1160px;
 }
 .Inscription2{
     font-size: 18px;
@@ -603,7 +603,7 @@ width: auto;
 padding: 5px 50px;
 border-radius: 5px;
 font-size: 15px;
-color: #1f16a1 ;
+color:#051f42 ;
 vertical-align: 100px;
  /* align-content: center; */   
     }
@@ -660,12 +660,12 @@ form input {
  font-size: px;
  border-radius: 15px;
  opacity:0.8;
- color:blue;
+ color:#051f42;
 }
 form button {
     padding: 10px 20px;
     background-color: #f3d74cd2;
-    color: blue;
+    color: #051f42;
     border: none;
     border-radius: 10px;
     font-family: Poppins;
@@ -756,7 +756,7 @@ transition: background-color 0.3s ease;
 }
 
 .submit-btn {
-    color: #004aad;
+    color: #051f42;
     border: none;
     padding: 10px 20px;
     border-radius: 15px;
@@ -856,8 +856,8 @@ padding-inline: 15px;
                  
 position: relative;
 width: 191px;
-left: 201px;
-color: #004aad;
+left: 220px;
+color:#051f42;
 background-color: #f3d64c;
 font-family: Alfa Slab One;
 height: 45px;
@@ -870,7 +870,7 @@ margin-top: -43px;
     position: relative;
     width: 191px;
     left: 201px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
     font-family: Alfa Slab One;
     height: 45px;
@@ -884,7 +884,7 @@ margin-top: -43px;
         position: relative;
         width: 191px;
         left: 201px;
-        color: #004aad;
+        color: #051f42;
         background-color: #f3d64c;
         font-family: Alfa Slab One;
         height: 45px;
@@ -895,25 +895,25 @@ margin-top: -43px;
         }
 .bntNavbarss{    
 width: 191px;
-color: #004aad;
+color:#051f42;
 background-color: #f3d64c;
 font-family: Alfa Slab One;
 height: 45px;
 font-size: 17px;
 border-radius: 54px;
-margin-left: 75%;
+margin-left: 00%;
 position: relative;
 top: 20px;
 }
 .bntNavbars{    
     width: 191px;
-    color: #004aad;
+    color: #051f42;
     background-color: #f3d64c;
     font-family: Alfa Slab One;
     height: 45px;
     font-size: 17px;
     border-radius: 54px;
-    margin-left: 85%;
+    margin-left: 00%;
     }
 .forget-pass {
 margin-top: 18px;
@@ -998,7 +998,7 @@ font-size: 18px;
              }
              #emailForm [type="submit"]{
                 margin-top: 80px;
-                color: #004aad;
+                color: #051f42;
                  background-color: #f3d64c;
                  font-family: Alfa Slab One;
                  height: 45px;

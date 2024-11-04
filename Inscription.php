@@ -9,7 +9,7 @@
 
 </head>
 <body>
-     <div id="id1"> <img class="cl12" src="img/LOGO.png" alt="Logo" height="50px"><h3><b>FitTrack</b></h3>
+     <div id="id1"> <img class="cl12" src="img/battement-de-coeur (3).png" alt="Logo" height="50px"><h3><b>FitTrack</b></h3>
         <header><a class="home" href="home.html">Accueil</a>
          <a class="con" href="connexion.php">Se Connecter</a>
          </header></div>
@@ -49,8 +49,8 @@
             <button onclick="window.location.href='home.html';" id="Annuler" class="cl7">Annuler</button>           
          
          </form>
-         <div class="cl8"><img class="cl10" src="img/TEL.png" height="40px" alt="tel">123-456-789 </div>
-         <div class="cl9"><img class="cl11" src="img/ADRESSE.png" height="40px" alt="adresse">FitTrack@gmail.com</div>
+         <div class="cl8"><img class="cl10" src="img/appel-telephonique (1).png" height="40px" alt="tel">123-456-789 </div>
+         <div class="cl9"><img class="cl11" src="img/email (1).png" height="40px" alt="adresse">FitTrack@gmail.com</div>
          <Span style="color: red;" id="erreur1"></Span><br>
          <Span style="color: red;" id="erreur2"></Span>
          <script src="JS/inscription.js"></script>

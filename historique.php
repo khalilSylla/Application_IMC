@@ -1,41 +1,7 @@
-<!-- <?php
-session_start();
-require_once("db.php");
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id_to_delete'])) {
-    $idToDelete = $_POST['id_to_delete'];
-
-    // Préparer la requête pour supprimer l'entrée avec l'ID spécifié
-    $stmt = $PDO->prepare("DELETE FROM imc_calculateur WHERE ID_IMC = :id_to_delete");
-    $stmt->bindParam(':id_to_delete', $idToDelete);
-    $stmt->execute();
-
-    // Rediriger l'utilisateur après la suppression pour éviter de soumettre à nouveau le formulaire en actualisant la page
-    header("Location: " . $_SERVER['PHP_SELF']);
-}
-// Récupérer les résultats d'IMC de l'utilisateur
-$utilisateur = 1;
-$searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
-if ($searchQuery) {
-    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id  AND (IMC LIKE :search OR DATE_CALCUL LIKE :search OR POIDS LIKE :search OR TAILLE LIKE :search)ORDER BY date_calcul DESC");
-    $searchQuery = '%' . $searchQuery . '%';
-    $stmt->bindParam(':search', $searchQuery);
-} else {
-    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id ORDER BY id_imc DESC, date_calcul DESC");
-}
-$stmt->bindParam(':utilisateur_id', $utilisateur);
-$stmt->execute();
-$imc_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$imc_results_json = json_encode($imc_results);
-// Récupérer les informations de l'utilisateur
-$stmt = $PDO->prepare("SELECT prenom,nom, email FROM utilisateur WHERE id_utilisateur = :utilisateur_id");
-$stmt->bindParam(':utilisateur_id', $utilisateur);
-$stmt->execute();
-
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-?> -->
 <?php
-session_start(); // Démarre la session
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Démarre la session
+}
 require_once("db.php");
 
 // Vérifier si l'utilisateur est connecté

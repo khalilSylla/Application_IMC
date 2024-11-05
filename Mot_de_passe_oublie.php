@@ -43,7 +43,7 @@ if (isset($_POST['email'])) {
     $mail->Subject = 'Réinitialisation de votre mot de passe';
     $mail->MsgHTML("
         <p>Bonjour,</p>
-        <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Utilisez le code suivant pour réinitialiser votre mot de passe :</p>
+        <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. <br> Utilisez le code suivant pour réinitialiser votre mot de passe :</p>
         <h3 style='color: blue;'>$Code</h3>
         <p>Veuillez entrer ce code sur la page de réinitialisation pour continuer le processus.</p>
         <p>Si vous n'avez pas demandé de réinitialisation, vous pouvez ignorer cet email.</p>
@@ -85,17 +85,27 @@ if (isset($_POST['email'])) {
     <h3>Mot de passe oublié</h3>
     <h4>Générer votre mot de passe</h4>
     <div>
+        <!-- <section class="messmdp" >Veuillez saisir l'adresse email associée à votre compte. <br> Nous vous enverrons un lien pour réinitialiser votre mot de passe.</section> -->
         <form id="emailForm" method="post" action="">
             <label for="email">Email</label><br>
             <input name="email" type="email" id="email " required>
             <button type="submit">Valider</button>
             <button type="button" class="bntNavbar2" onclick="window.location.href='home.html';">Annuler</button>
         </form>
+        <!-- <section class="form-container">
+    <form id="emailForm" method="post" action="">
+        <label for="email" class="emailmdp">Email</label><br>
+        <input name="email" type="email" id="email" required>
+        <button type="submit">Valider</button>
+        <button type="button" class="btnNavbar2" onclick="window.location.href='home.html';">Annuler</button>
+    </form>
+</section> -->
+
         
 <div class="error-message">
             <?php echo $error; ?>
         <!-- <div class="error-message"> <?php echo $error; ?> </div> -->
-        <p class="pp2" style="margin-top: -170px;margin-right: 75%;font-size: 15px;">Veuillez entrer une adresse mail valide <br> pour recevoir le code de verification</p>
+        <p class="pp2" style="margin-top: 70px;margin-right: 19%;font-size: 15px;">Veuillez entrer une adresse mail valide <br> pour recevoir le code de verification</p>
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>

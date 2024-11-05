@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 require_once('db.php');
 // Initialisation des variables
@@ -104,7 +104,122 @@ try {
 header('Location: historique.php');
 exit;
 }
+?> -->
+<?php
+session_start();
+require_once('db.php');
+
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['id_user'])) {
+    header('Location: connexion.php'); // Redirige vers la page de connexion si non connecté
+    exit();
+}
+
+// Utilisez l'ID de l'utilisateur connecté
+$id_user = $_SESSION['id_user'];
+
+// Récupérer les informations de l'utilisateur connecté
+$stmt_user = $PDO->prepare('SELECT prenom, nom, email FROM utilisateur WHERE ID_UTILISATEUR = :id_user');
+$stmt_user->execute([':id_user' => $id_user]);
+$user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    echo "Utilisateur introuvable.";
+    exit();
+}
+
+// Initialisation des variables
+$id = $poids = $taille = $imc = $date = '';
+
+// Vérifiez si un ID est passé dans l'URL pour la modification
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    $stmt = $PDO->prepare('SELECT * FROM imc_calculateur WHERE ID_IMC = :id AND ID_UTILISATEUR = :id_user');
+    $stmt->execute([':id' => $id, ':id_user' => $id_user]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row) {
+        $poids = $row['POIDS'];
+        $taille = $row['TAILLE'];
+        $imc = $row['IMC'];
+        $date = $row['DATE_CALCUL'];
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $poids = $_POST['POIDS'];
+    $taille = $_POST['TAILLE'];
+    $imc = $_POST['IMC'];
+    $date = $_POST['DATE_CALCUL'];
+    $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+
+    if ($id) {
+        // Modification
+        $stmt = $PDO->prepare('UPDATE imc_calculateur SET POIDS = :poids, TAILLE = :taille, IMC = :imc, DATE_CALCUL = :date_calcul WHERE ID_IMC = :id AND ID_UTILISATEUR = :id_user');
+        $stmt->execute([
+            ':poids' => $poids,
+            ':taille' => $taille,
+            ':imc' => $imc,
+            ':date_calcul' => $date,
+            ':id' => $id,
+            ':id_user' => $id_user
+        ]);
+    } else {
+        // Ajout
+        $stmt = $PDO->prepare('INSERT INTO imc_calculateur (POIDS, TAILLE, IMC, DATE_CALCUL, ID_UTILISATEUR) VALUES (:poids, :taille, :imc, :date_calcul, :id_user)');
+        $stmt->execute([
+            ':poids' => $poids,
+            ':taille' => $taille,
+            ':imc' => $imc,
+            ':date_calcul' => $date,
+            ':id_user' => $id_user
+        ]);
+        $id = $PDO->lastInsertId();
+    }
+
+    // Mettre à jour la notification
+    function deduireNotificationParId($id) {
+        global $PDO;
+
+        $stmt = $PDO->prepare("SELECT IMC FROM imc_calculateur WHERE ID_IMC = ?");
+        $stmt->execute([$id]);
+        $entry = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($entry === false) {
+            throw new Exception("Aucune entrée trouvée pour cet ID.");
+        }
+
+        $imc = $entry['IMC'];
+        if ($imc < 18.5) {
+            $notification = 'sous-poids';
+        } elseif ($imc >= 18.5 && $imc <= 24.9) {
+            $notification = 'normal';
+        } elseif ($imc >= 25 && $imc <= 29.9) {
+            $notification = 'surpoids';
+        } elseif ($imc >= 30 && $imc <= 34.9) {
+            $notification = 'obesite';
+        } else {
+            $notification = 'extreme-obesite';
+        }
+
+        $updateStmt = $PDO->prepare("UPDATE imc_calculateur SET notification = ? WHERE ID_IMC = ?");
+        $updateStmt->execute([$notification, $id]);
+
+        return "La notification a été mise à jour : " . $notification;
+    }
+
+    try {
+        $resultat = deduireNotificationParId($id);
+        echo $resultat;
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+
+    header('Location: historique.php');
+    exit();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +244,7 @@ exit;
             <img src="img/utilisateur (3).png" alt="Profil" class="profile-icon" style="width: 64px; height: 64px; color: #fff;color:#fff">
             <ul class="dropdown-menu" id="profileMenu">
                 <li><a href="User_Profil.html" id="p1">Mon Profil</a></li>
-                <li><a href="home.html" id="p2">Deconnexion </a></li>
+                <li><a href="deconnexion.php" id="p2">Deconnexion </a></li>
             </ul>
         </div>
         </div>

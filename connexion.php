@@ -12,6 +12,8 @@ if (isset($_POST['email'], $_POST['password'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($user) {
+        $_SESSION['id_user'] = $user['ID_UTILISATEUR'];
+
         // Hacher le mot de passe saisi en utilisant SHA-256
         $hashedPasswordInput = hash('sha256', $_POST['password']);
         
@@ -38,7 +40,8 @@ if (isset($_POST['email'], $_POST['password'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Alfa+Slab+One&display=swap" rel="stylesheet">
-    <title>FitTrack</title>
+    <!-- <title>FitTrack</title> -->
+     
     <style>
         label {
             display: block;
@@ -102,7 +105,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 </head>
 <body>
     <div id="id1" class="accueil"> 
-    <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2><b>FitTrack</b></h2>
+        <img class="cl1" src="img/battement-de-coeur (3).png" alt="Logo" height="40px"><h2><b>FitTrack</b></h2>
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>

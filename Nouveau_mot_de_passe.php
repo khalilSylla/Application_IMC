@@ -1,5 +1,7 @@
 <?php
 require_once "db.php"; 
+$error = ''; 
+$success = ''; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Code = $_POST['code'];
@@ -14,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user) {
         
         if ($newPassword === $confirmPassword) {
+            $user_id = $user['ID_UTILISATEUR'];
             $user_id=1;$drapeau_reinitialisation=0;$code_reinitialisation=0;
             $hashedPassword = hash('sha256',$newPassword );
             $stmt = $PDO->prepare("UPDATE utilisateur SET MOT_DE_PASSE = :password, code_reinitialisation= :code_reinitialisation, drapeau_reinitialisation= :drapeau_reinitialisation  WHERE ID_UTILISATEUR = :id");
@@ -26,13 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // header("Location: connexion.php");
             // exit();
         } else {
-            echo "Les mots de passe ne correspondent pas.";
+            $error = "Erreur lors de la mise à jour du mot de passe.";
+            }
+        } else {
+            $error = "Les mots de passe ne correspondent pas.";
         }
     } else {
-        echo "Code de validation invalide.";
+        $error = "Code de validation invalide.";
     }
 }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -113,9 +119,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        <button type="submit">Valider</button>
                         <button type="button" class="bntNavbar" onclick="window.location.href='home.html';">Annuler</button>
                     </form>
-                    <?php if (!empty($message)): ?>
-                        <div class="message"><?php echo $message; ?></div>
+                    <?php if (!empty($error)): ?>
+                        <div class="message error" style="color: red;"><?php echo $error; ?></div>
                     <?php endif; ?>
+                    <?php if (!empty($success)): ?>
+                <div class="message success"><?php echo $success; ?></div>
+            <?php endif; ?>
                 </div>
             </div>
             

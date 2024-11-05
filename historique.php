@@ -4,6 +4,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start(); // Démarre la session si elle n'est pas déjà active
 }
 
+// session_start(); // Démarre la session
+
 require_once("db.php");
 
 // Vérifier si l'utilisateur est connecté
@@ -14,42 +16,43 @@ if (!isset($_SESSION['id_utilisateur'])) {
 }
 
 // Utiliser l'ID de l'utilisateur connecté
-$id_utilisateur = $_SESSION['id_utilisateur'];
+$utilisateur = $_SESSION['id_utilisateur'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id_to_delete'])) {
     $idToDelete = $_POST['id_to_delete'];
 
     // Préparer la requête pour supprimer l'entrée avec l'ID spécifié
-    $stmt = $PDO->prepare("DELETE FROM imc_calculateur WHERE ID_IMC = :id_to_delete AND ID_UTILISATEUR = :utilisateur_id");
+    $stmt = $PDO->prepare("DELETE FROM imc_calculateur WHERE ID_IMC = :id_to_delete AND id_utilisateur = :utilisateur_id");
     $stmt->bindParam(':id_to_delete', $idToDelete);
-    $stmt->bindParam(':utilisateur_id', $id_utilisateur); // S'assurer que l'IMC appartient à l'utilisateur connecté
+    $stmt->bindParam(':utilisateur_id', $utilisateur); // S'assurer que l'IMC appartient à l'utilisateur connecté
     $stmt->execute();
 
     // Rediriger l'utilisateur après la suppression
     header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
 }
 
 // Récupérer les résultats d'IMC de l'utilisateur
 $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
 if ($searchQuery) {
-    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE ID_UTILISATEUR = :utilisateur_id AND (IMC LIKE :search OR DATE_CALCUL LIKE :search OR POIDS LIKE :search OR TAILLE LIKE :search) ORDER BY DATE_CALCUL DESC");
+    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id AND (IMC LIKE :search OR DATE_CALCUL LIKE :search OR POIDS LIKE :search OR TAILLE LIKE :search) ORDER BY date_calcul DESC");
     $searchQuery = '%' . $searchQuery . '%';
     $stmt->bindParam(':search', $searchQuery);
 } else {
-    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE ID_UTILISATEUR = :utilisateur_id ORDER BY ID_IMC DESC, DATE_CALCUL DESC");
+    $stmt = $PDO->prepare("SELECT * FROM imc_calculateur WHERE id_utilisateur = :utilisateur_id ORDER BY id_imc DESC, date_calcul DESC");
 }
-$stmt->bindParam(':utilisateur_id', $id_utilisateur);
+$stmt->bindParam(':utilisateur_id', $utilisateur);
 $stmt->execute();
 $imc_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$imc_results_json = json_encode($imc_results);
 
 // Récupérer les informations de l'utilisateur
-$stmt = $PDO->prepare("SELECT prenom, nom, email FROM utilisateur WHERE ID_UTILISATEUR = :utilisateur_id");
-$stmt->bindParam(':utilisateur_id', $id_utilisateur);
+$stmt = $PDO->prepare("SELECT prenom, nom, email FROM utilisateur WHERE id_utilisateur = :utilisateur_id");
+$stmt->bindParam(':utilisateur_id', $utilisateur);
 $stmt->execute();
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +76,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <img src="img/utilisateur (3).png" alt="Profil" class="profile-icon" style="width: 64px; height: 64px; color: #fff;color:#fff">
 
             <ul class="dropdown-menu" id="profileMenu">
-                <li><a href="User_Profil.html" id="p1">Mon Profil</a></li>
+                <li><a href="User_Profil.php" id="p1">Mon Profil</a></li>
                 <li><a href="deconnexion.php" id="p2">Deconnexion </a></li>
             </ul>
         </div>

@@ -90,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($champsModifies)) {
         $queryUpdateUser = "UPDATE utilisateur SET " . implode(', ', $champsModifies) . " WHERE ID_UTILISATEUR = :id";
         $params[':id'] = $id_utilisateur;
+        var_dump($id_utilisateur);
 
         $stmtUpdateUser = $connectionbd->prepare($queryUpdateUser);
         foreach ($params as $param => $value) {
@@ -203,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="id1">
     <img class="cl12" src="img/battement-de-coeur (3).png" alt="Logo" height="45px"><h2>FitTrack</h2>
         <header>
-            <a class="home" href="Application_IMC/home.html">Accueil</a>
+            <a class="home" href="historique.php">Accueil</a>
             <a class="con" href="deconnexion.php">Se Déconnecter</a>
             <a class="about" href="#">À Propos</a>
         </header>

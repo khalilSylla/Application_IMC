@@ -4,8 +4,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 require_once "PHPMailer/src/PHPMailer.php";
 require_once "PHPMailer/src/SMTP.php";
-require_once "PHPMailer/src/Exception.php";
-// require_once 'vendor/autoload.php'; 
+require_once "PHPMailer/src/Exception.php"; 
 require_once "db.php";
 $error = "";
 $debug = true;
@@ -55,9 +54,7 @@ if (isset($_POST['email'])) {
             header("Location:Nouveau_mot_de_passe");
             exit();
         } catch (Exception $e) {
-            // $error = "";
-
-            // echo "Erreur d'envoi de mail : " . $mail->ErrorInfo;
+           
             $error = "Erreur d'envoi de mail : " . $mail->ErrorInfo;
         }
     } else {
@@ -92,26 +89,18 @@ if (isset($_POST['email'])) {
             <button type="submit">Valider</button>
             <button type="button" class="bntNavbar2" onclick="window.location.href='home.html';">Annuler</button>
         </form>
-        <!-- <section class="form-container">
-    <form id="emailForm" method="post" action="">
-        <label for="email" class="emailmdp">Email</label><br>
-        <input name="email" type="email" id="email" required>
-        <button type="submit">Valider</button>
-        <button type="button" class="btnNavbar2" onclick="window.location.href='home.html';">Annuler</button>
-    </form>
-</section> -->
 
         
 <div class="error-message">
             <?php echo $error; ?>
         <!-- <div class="error-message"> <?php echo $error; ?> </div> -->
-        <p class="pp2" style="margin-top: 70px;margin-right: 19%;font-size: 15px;">Veuillez entrer une adresse mail valide <br> pour recevoir le code de verification</p>
+        <!-- <p class="pp2" style="margin-top: 70px;margin-right: 19%;font-size: 15px;">Veuillez entrer une adresse mail valide <br> pour recevoir le code de verification</p> -->
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>
-                <li><a href="connexion.html"><b>Se connecter</b></a></li>
+                <li><a href="connexion.php"><b>Se connecter</b></a></li>
                  
-                  <li><a href="home.html">Se Déconnecter</a></li>
+                  <li><a href="deconnexion.php">Se Déconnecter</a></li>
             </ul>
         </div>
         <style>

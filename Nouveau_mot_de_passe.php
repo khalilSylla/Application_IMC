@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($newPassword === $confirmPassword) {
             $user_id = $user['ID_UTILISATEUR'];
-            $user_id=1;$drapeau_reinitialisation=0;$code_reinitialisation=0;
+            $drapeau_reinitialisation=0;$code_reinitialisation=0;
             $hashedPassword = hash('sha256',$newPassword );
             $stmt = $PDO->prepare("UPDATE utilisateur SET MOT_DE_PASSE = :password, code_reinitialisation= :code_reinitialisation, drapeau_reinitialisation= :drapeau_reinitialisation  WHERE ID_UTILISATEUR = :id");
             $stmt->execute([':password' => $hashedPassword, ':id' => $user_id,':code_reinitialisation' => $code_reinitialisation, ':drapeau_reinitialisation'=>$drapeau_reinitialisation]);
@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="menu">
             <ul>
                 <li><a href="home.html"><b>Accueil</b></a></li>
-                <li><a href="connexion.html"><b>Se connecter</b></a></li>
+                <li><a href="connexion.php"><b>Se connecter</b></a></li>
                  
-                  <li><a href="home.html">Se Déconnecter</a></li>
+                  <li><a href="deconnexion.php">Se Déconnecter</a></li>
             </ul>
         </div>
         <style>

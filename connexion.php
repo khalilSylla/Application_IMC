@@ -12,7 +12,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($user) {
-        $_SESSION['id_user'] = $user['ID_UTILISATEUR'];
+        // $_SESSION['id_user'] = $user['ID_UTILISATEUR'];
 
         // Hacher le mot de passe saisi en utilisant SHA-256
         $hashedPasswordInput = hash('sha256', $_POST['password']);
